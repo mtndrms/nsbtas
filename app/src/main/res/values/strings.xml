@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">NSBTAS</string>
+    <string name="username_label">Kullanıcı Adı</string>
+    <string name="password_label">Şifre</string>
+    <string name="log_in">Giriş</string>
+    <string name="i_don_t_have_an_account">Hesabım yok</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next_stage">Devam Et</string>
+    <string name="your_address">Adresiniz*</string>
+    <string name="your_note">Notunuz*</string>
+    <string name="select_service_type">Ürün ve Hizmet Seç</string>
+    <string name="amount">Tutar*</string>
+    <string name="e_mail_address">E-Posta Adresi</string>
+    <string name="phone_number">Telefon Numarası*</string>
+    <string name="customer_name">Müşteri Adı*</string>
+    <string name="company_name">Firma Adı</string>
+    <string name="card_number_placeholder">**** **** **** ****</string>
+    <string name="card_owner_info_placeholder">ADI SOYADI</string>
+    <string name="card_expr_date_placeholder">GG/YY</string>
+    <string name="card_number">Kart numarası*</string>
+    <string name="name_on_the_card">Kart üzerindeki isim*</string>
+    <string name="dd_yy">GG/YY*</string>
+    <string name="cvv">CVV*</string>
+    <string name="customer_info">Müşteri Bilgileri</string>
+    <string name="card_info">Kart Bilgileri</string>
+    <string name="cvv_placeholder">***</string>
+    <string name="proceed_payment">Ödemeyi Tamamla</string>
+    <string name="pick_service_type">Ürün/Hizmet Seçin</string>
+</resources>
