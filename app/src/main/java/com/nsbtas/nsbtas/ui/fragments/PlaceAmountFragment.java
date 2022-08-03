@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,13 @@ import com.nsbtas.nsbtas.R;
 
 public class PlaceAmountFragment extends Fragment {
     TextView amount;
+    private int serviceId;
+    private String firmName;
+    private String customerName;
+    private String phoneNumber;
+    private String emailAddress;
+    private String note;
+    private String address;
 
     public PlaceAmountFragment() {
     }
@@ -38,6 +46,35 @@ public class PlaceAmountFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         amount = view.findViewById(R.id.tvAmount);
+
+        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                serviceId = result.getInt("serviceId");
+                firmName = result.getString("companyName");
+                customerName = result.getString("customerName");
+                emailAddress = result.getString("emailAddress");
+                address = result.getString("address");
+                note = result.getString("note");
+                phoneNumber = result.getString("phoneNumber");
+            }
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Bundle result = new Bundle();
+
+        result.putInt("serviceId", serviceId);
+        result.putString("companyName", firmName);
+        result.putString("customerName", customerName);
+        result.putString("emailAddress", emailAddress);
+        result.putString("address", address);
+        result.putString("note", note);
+        result.putString("phoneNumber", phoneNumber);
+        getParentFragmentManager().setFragmentResult("requestKey", result);
     }
 
     public int getAmount() {

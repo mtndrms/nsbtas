@@ -53,16 +53,23 @@ public class ChooseServiceFragment extends Fragment {
         LinearLayout service1 = view.findViewById(R.id.service1);
         LinearLayout service2 = view.findViewById(R.id.service2);
         LinearLayout service3 = view.findViewById(R.id.service3);
+        Bundle result = new Bundle();
 
         service1.setOnClickListener(view1 -> {
+            result.putInt("serviceId", 1);
+            getParentFragmentManager().setFragmentResult("requestKey", result);
             this.serviceChosen = 1;
         });
 
         service2.setOnClickListener(view12 -> {
+            result.putInt("serviceId", 2);
+            getParentFragmentManager().setFragmentResult("requestKey", result);
             this.serviceChosen = 2;
         });
 
         service3.setOnClickListener(view13 -> {
+            result.putInt("serviceId", 3);
+            getParentFragmentManager().setFragmentResult("requestKey", result);
             this.serviceChosen = 3;
         });
     }

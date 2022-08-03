@@ -1,14 +1,18 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
+import static com.nsbtas.nsbtas.utils.Utils.getServiceById;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.nsbtas.nsbtas.R;
 
@@ -35,5 +39,33 @@ public class ConfirmAndProceedPaymentFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        TextView tvService = view.findViewById(R.id.service);
+
+        TextView tvCompanyName = view.findViewById(R.id.tvCompanyName);
+        TextView tvCustomerName = view.findViewById(R.id.tvCustomerName);
+        TextView tvPhoneNumber = view.findViewById(R.id.tvPhoneNumber);
+        TextView tvEmailAddress = view.findViewById(R.id.tvEmailAddress);
+        TextView tvNote = view.findViewById(R.id.tvNote);
+        TextView tvAddress = view.findViewById(R.id.tvAddress);
+
+        TextView tvCardOwner = view.findViewById(R.id.tvCardOwnerInfo);
+        TextView tvCardNumber = view.findViewById(R.id.tvCardNumber);
+        TextView tvCardExpDate = view.findViewById(R.id.tvCardExpDate);
+        TextView tvCardCVV = view.findViewById(R.id.tvCardCVV);
+
+        TextView tvAmount = view.findViewById(R.id.tvAmount);
+
+        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                tvService.setText(getServiceById(result.getInt("serviceId")));
+                tvCompanyName.setText(result.getString("companyName"));
+                tvCustomerName.setText(result.getString("customerName"));
+                tvPhoneNumber.setText(result.getString("phoneNumber"));
+                tvAddress.setText(result.getString("address"));
+                tvEmailAddress.setText(result.getString("emailAddress"));
+                tvNote.setText(result.getString("note"));
+            }
+        });
     }
 }

@@ -17,7 +17,7 @@ import com.nsbtas.nsbtas.ui.fragments.ConfirmAndProceedPaymentFragment;
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.ui.fragments.ChooseServiceFragment;
 import com.nsbtas.nsbtas.ui.fragments.PlaceAmountFragment;
-import com.nsbtas.nsbtas.ui.fragments.SelectCardFragment;
+import com.nsbtas.nsbtas.ui.fragments.SelectPaymentMethodFragment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +53,7 @@ public class PaymentActivity extends AppCompatActivity {
         AtomicInteger currentPage = new AtomicInteger(1);
         stages.put(1, new ChooseServiceFragment());
         stages.put(2, new CustomerInformationFragment());
-        stages.put(3, new SelectCardFragment());
+        stages.put(3, new SelectPaymentMethodFragment());
         stages.put(4, new PlaceAmountFragment());
         stages.put(5, new ConfirmAndProceedPaymentFragment());
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".ui.fragments.SelectCardFragment">
+    tools:context=".ui.fragments.SelectPaymentMethodFragment">
 
     <TextView
         android:id="@+id/labelSavedCards"
@@ -14,7 +14,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/poppins_regular"
-        android:text="@string/your_saved_cards"
+        android:text="@string/saved_payment_methods"
         android:textColor="@color/primary_text_color"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"

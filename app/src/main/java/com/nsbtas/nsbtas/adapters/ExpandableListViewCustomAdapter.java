@@ -1,7 +1,6 @@
 package com.nsbtas.nsbtas.adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import androidx.core.content.ContextCompat;
 
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.models.Card;
-import com.nsbtas.nsbtas.ui.activities.PaymentActivity;
-import com.nsbtas.nsbtas.ui.fragments.SelectCardFragment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +58,6 @@ public class ExpandableListViewCustomAdapter extends BaseExpandableListAdapter {
         tvCardOwner.setText(expandedListText.getCardOwner());
         tvCardNumber.setText(String.format("**** %s", expandedListText.getCardNumber().substring(expandedListText.getCardNumber().length() - 4)));
         convertView.setOnClickListener(view -> {
-            PaymentActivity activity = new PaymentActivity();
             if (!cardChosen) {
                 if (selected.getVisibility() == View.VISIBLE) {
                     cardChosen = false;

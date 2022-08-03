@@ -72,6 +72,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvCompanyName"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,6 +91,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvCustomerName"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -108,6 +110,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvPhoneNumber"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -126,6 +129,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvEmailAddress"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,6 +149,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvNote"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,6 +168,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvAddress"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -198,6 +204,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvCardOwnerInfo"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -216,6 +223,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvCardNumber"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,6 +242,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvCardExpDate"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -252,6 +261,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvCardCVV"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -288,6 +298,7 @@
                     android:textAlignment="viewStart" />
 
                 <TextView
+                    android:id="@+id/tvAmount"
                     style="@style/ConfirmInfoTableLayoutStyle.Values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ public class CustomerInformationFragment extends Fragment {
     TextInputLayout etNote;
     TextInputLayout etPhysicalAddress;
 
+    private int serviceId;
+
     public CustomerInformationFragment() {
 
     }
@@ -38,6 +41,13 @@ public class CustomerInformationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                serviceId = bundle.getInt("serviceId");
+            }
+        });
     }
 
     @Override
@@ -56,6 +66,22 @@ public class CustomerInformationFragment extends Fragment {
         etNote = view.findViewById(R.id.etNote); // required
         etPhysicalAddress = view.findViewById(R.id.etPhysicalAddress); // required
         List<TextInputLayout> requiredFields = Arrays.asList(etCustomerName, etPhoneNumber, etNote, etPhysicalAddress);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Bundle result = new Bundle();
+
+        result.putInt("serviceId", serviceId);
+        result.putString("companyName", etCompanyName.getEditText().getText().toString());
+        result.putString("customerName", etCustomerName.getEditText().getText().toString());
+        result.putString("emailAddress", etEmailAddress.getEditText().getText().toString());
+        result.putString("address", etPhysicalAddress.getEditText().getText().toString());
+        result.putString("note", etNote.getEditText().getText().toString());
+        result.putString("phoneNumber", etPhoneNumber.getEditText().getText().toString());
+        getParentFragmentManager().setFragmentResult("requestKey", result);
     }
 
     public boolean checkRequiredFields(List<TextInputLayout> requiredFields) {
