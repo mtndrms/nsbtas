@@ -26,4 +26,12 @@
     <string name="cvv_placeholder">***</string>
     <string name="proceed_payment">Ödemeyi Tamamla</string>
     <string name="pick_service_type">Ürün/Hizmet Seçin</string>
+    <string name="back">Geri</string>
+    <string name="cancel">Vazgeç</string>
+    <string name="add_new_card">Yeni kart ekle</string>
+    <string name="save">Kaydet</string>
+    <string name="homepage">Anasayfa</string>
+    <string name="hello">Merhaba,</string>
+    <string name="login_to_your_account">Hesabınıza giriş yapın</string>
+    <string name="your_saved_cards">Kayıtlı kartlarınız</string>
 </resources>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.PlaceAmountFragment">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:text="Ödenecek miktarı girin"
+        android:textColor="@color/primary_text_color"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="424242"
+        android:textColor="@color/primary_text_color"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="25dp"
+        android:columnCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAmount">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="3"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="4"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="5"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="6"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="7"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="8"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="9"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="."
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="36sp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:contentDescription="@string/app_name"
+            android:scaleType="center"
+            android:src="@drawable/icon_back" />
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

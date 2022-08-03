@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.nsbtas.nsbtas">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,19 +16,24 @@
         android:theme="@style/Theme.NSBTAS"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activities.AddNewCardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.LoginActivity"
             android:exported="true"
-            android:label="YourAppName">
+            android:label="NSBTAS">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

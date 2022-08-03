@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/edit"
+        android:contentDescription="@string/app_name"
+        android:title="Menu Item"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/favorite"
+        android:contentDescription="@string/app_name"
+        android:icon="@drawable/icon_send"
+        android:title="Menu Item 2"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/more"
+        android:contentDescription="@string/app_name"
+        android:title="Menu Item 3"
+        app:showAsAction="never" />
+
+</menu>

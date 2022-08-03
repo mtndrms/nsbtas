@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ui.fragments.HomepageFragment"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:id="@+id/ivCustomerProfilePicture"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/profile_picture_circle_around"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/icon_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/glTopLimit" />
+
+    <TextView
+        android:id="@+id/tvCustomerUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Test User"
+        android:textColor="@color/primary_text_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivCustomerProfilePicture" />
+
+    <TextView
+        android:id="@+id/labelShortcuts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Sık Kullanılanlar"
+        android:textColor="@color/primary_text_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/shortcuts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/shortcuts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/latestExpensesContainer">
+
+        <LinearLayout
+            android:id="@+id/btnMakePayment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/bg_icon"
+                android:backgroundTint="@color/nlksoft_color_secondary"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_send" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Ödeme Yap"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnServices"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/bg_icon"
+                android:backgroundTint="#b548c6"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_services" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Hizmetler"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnHelp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/bg_icon"
+                android:backgroundTint="#ff8700"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_contact" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Yardım"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/bg_icon"
+                android:backgroundTint="#22b07d"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_more" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Daha Fazla"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text_color" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/latestExpensesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/bg_last_transactions"
+        android:maxHeight="350dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Son Hareketleriniz"
+            android:textColor="@color/primary_text_color"
+            android:textSize="16sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLatestExpenses"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="125dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTopLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="25dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
