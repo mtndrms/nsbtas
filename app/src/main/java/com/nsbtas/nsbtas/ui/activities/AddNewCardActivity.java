@@ -1,10 +1,13 @@
 package com.nsbtas.nsbtas.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,14 +35,15 @@ public class AddNewCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_card);
 
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.background));
+        SharedPreferences sharedPreferences = getSharedPreferences("NSBTAS_APP_SETTINGS", Context.MODE_PRIVATE);
+        boolean isLightThemeActive = sharedPreferences.getBoolean("isLightThemeActive", true);
+        if (isLightThemeActive) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
 
         ImageView btnBack = findViewById(R.id.btnBack);
-
-        btnBack.setOnClickListener(view -> finish());
-
         TextInputLayout etCardNumber = findViewById(R.id.etCardNumber);
         TextInputLayout etCardOwnerInfo = findViewById(R.id.etCardOwnerInfo);
         TextInputLayout etExpirationDate = findViewById(R.id.etExpirationDate);
@@ -56,6 +60,8 @@ public class AddNewCardActivity extends AppCompatActivity {
 
         AnimatorSet front_animation = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.card_turn_front_animator);
         AnimatorSet back_animation = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.card_turn_back_animator);
+
+        btnBack.setOnClickListener(view -> finish());
 
         Objects.requireNonNull(etCardNumber.getEditText()).addTextChangedListener(new TextWatcher() {
             private static final int TOTAL_SYMBOLS = 19;

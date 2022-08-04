@@ -10,7 +10,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/bg_icon"
-        android:backgroundTint="#373844"
+        android:backgroundTint="@color/background"
         android:contentDescription="@string/app_name"
         android:src="@drawable/icon_expense"
         app:layout_constraintBottom_toBottomOf="parent"

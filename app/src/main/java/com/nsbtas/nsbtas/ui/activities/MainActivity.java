@@ -2,12 +2,16 @@ package com.nsbtas.nsbtas.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
@@ -29,20 +33,49 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.background));
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
+        SharedPreferences sharedPreferences = getSharedPreferences("NSBTAS_APP_SETTINGS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        bottomNavigationView.setSelectedItemId(R.id.page_1);
+        boolean isLightThemeActive = sharedPreferences.getBoolean("isLightThemeActive", true);
+        if (isLightThemeActive) {
+            topAppBar.getMenu().getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_dark_mode));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                topAppBar.getMenu().getItem(0).setIconTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.icon_tint_color));
+            }
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else {
+            topAppBar.getMenu().getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_light_mode));
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        System.out.println(AppCompatDelegate.getDefaultNightMode());
 
         topAppBar.setNavigationOnClickListener(view -> {
             getSupportFragmentManager().popBackStack();
             if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
                 topAppBar.setNavigationIcon(null);
             }
+        });
+
+        topAppBar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case (R.id.switchTheme):
+                    System.out.println(AppCompatDelegate.getDefaultNightMode());
+                    if (isLightThemeActive) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        editor.putBoolean("isLightThemeActive", false);
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        editor.putBoolean("isLightThemeActive", true);
+                    }
+                    editor.apply();
+                    break;
+                case (R.id.favorite):
+                case (R.id.more):
+                    break;
+            }
+            return false;
         });
 
         bottomNavigationView.setOnItemSelectedListener(item -> {

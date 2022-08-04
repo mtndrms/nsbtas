@@ -2,15 +2,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/edit"
+        android:id="@+id/switchTheme"
         android:contentDescription="@string/app_name"
-        android:title="Menu Item"
-        app:showAsAction="never" />
+        android:icon="@drawable/icon_dark_mode"
+        android:iconTint="@color/icon_tint_color"
+        android:title="Temayı Değiştir"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/favorite"
         android:contentDescription="@string/app_name"
         android:icon="@drawable/icon_send"
+        android:iconTint="@color/icon_tint_color"
         android:title="Menu Item 2"
         app:showAsAction="never" />
 

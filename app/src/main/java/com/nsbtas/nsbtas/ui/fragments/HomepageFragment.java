@@ -1,5 +1,7 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
+import static com.nsbtas.nsbtas.LatestExpensesDataPump.getData;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -64,18 +66,8 @@ public class HomepageFragment extends Fragment {
             startActivity(callIntent);
         });
 
-        ArrayList<Expense> placeholderExpenses = new ArrayList<>();
-        placeholderExpenses.add(new Expense("Lorem", "12.12.2022", 123));
-        placeholderExpenses.add(new Expense("Ipsum Dolor Sit", "13.12.2022", 456));
-        placeholderExpenses.add(new Expense("Amet", "14.12.2022", 789));
-        placeholderExpenses.add(new Expense("Consectetur", "15.12.2022", 432));
-        placeholderExpenses.add(new Expense("Lorem", "12.12.2022", 123));
-        placeholderExpenses.add(new Expense("Ipsum Dolor Sit", "13.12.2022", 456));
-        placeholderExpenses.add(new Expense("Amet", "14.12.2022", 789));
-        placeholderExpenses.add(new Expense("Consectetur", "15.12.2022", 432));
-
         RecyclerView rvLatestExpenses = view.findViewById(R.id.rvLatestExpenses);
         rvLatestExpenses.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvLatestExpenses.setAdapter(new ExpenseRecyclerViewAdapter(placeholderExpenses));
+        rvLatestExpenses.setAdapter(new ExpenseRecyclerViewAdapter(getData()));
     }
 }

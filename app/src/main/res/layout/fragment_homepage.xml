@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    app:layoutDescription="@xml/fragment_homepage_scene"
     tools:context=".ui.fragments.HomepageFragment"
     tools:ignore="UseCompoundDrawables">
 
@@ -17,7 +18,8 @@
         android:src="@drawable/icon_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/glTopLimit" />
+        app:layout_constraintTop_toBottomOf="@id/glTopLimit"
+        app:tint="@color/icon_tint_color" />
 
     <TextView
         android:id="@+id/tvCustomerUsername"
@@ -35,7 +37,7 @@
         android:id="@+id/labelShortcuts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:fontFamily="@font/poppins_regular"
         android:text="Sık Kullanılanlar"
         android:textColor="@color/primary_text_color"
@@ -170,7 +172,6 @@
         </LinearLayout>
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/latestExpensesContainer"
         android:layout_width="match_parent"
@@ -184,7 +185,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Son Hareketleriniz"
@@ -212,5 +213,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="25dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintGuide_begin="10dp" />
+</androidx.constraintlayout.motion.widget.MotionLayout>
