@@ -8,12 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="text_field">#121212</color>
-    <color name="background">#F3F1F1</color>
-    <color name="background_secondary">#ffffff</color>
-    <color name="primary_text_color">#444d58</color>
+    <color name="background">#EDEDED</color>
+    <color name="background_secondary">#fdfdfd</color>
+    <color name="primary_text_color">#505050</color>
     <color name="secondary_text_color">#807D7F</color>
-    <color name="button_background_color">#283777</color>
-    <color name="button_text_color">#ffffff</color>
+    <color name="button_background_color">#505050</color>
+    <color name="button_text_color">#fdfdfd</color>
     <color name="nlksoft_color_primary">#283777</color>
     <color name="nlksoft_color_secondary">#3dc0f0</color>
     <color name="icon_tint_color">#807D7F</color>

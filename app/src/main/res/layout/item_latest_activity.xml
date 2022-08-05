@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="7dp">
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/bg_icon"
-        android:backgroundTint="@color/background"
         android:contentDescription="@string/app_name"
         android:src="@drawable/icon_expense"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +25,7 @@
         android:fontFamily="@font/poppins_semibold"
         android:text="Starbucks"
         android:textColor="@color/primary_text_color"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +48,7 @@
         android:fontFamily="@font/poppins_semibold"
         android:text="₺123"
         android:textColor="@color/primary_text_color"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

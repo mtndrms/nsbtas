@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             topAppBar.getMenu().getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_light_mode));
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
-        System.out.println(AppCompatDelegate.getDefaultNightMode());
 
         topAppBar.setNavigationOnClickListener(view -> {
             getSupportFragmentManager().popBackStack();
@@ -61,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         topAppBar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case (R.id.switchTheme):
-                    System.out.println(AppCompatDelegate.getDefaultNightMode());
                     if (isLightThemeActive) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         editor.putBoolean("isLightThemeActive", false);
