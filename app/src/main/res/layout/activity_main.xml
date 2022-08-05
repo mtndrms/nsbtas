@@ -9,25 +9,6 @@
     tools:context=".ui.activities.MainActivity"
     tools:ignore="UseCompoundDrawables">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/background"
-            app:menu="@menu/top_app_bar_menu"
-            app:navigationIconTint="@color/icon_tint_color"
-            app:title="@string/homepage"
-            app:titleCentered="true"
-            app:titleTextColor="@color/primary_text_color" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
         android:name="com.nsbtas.nsbtas.ui.fragments.HomepageFragment"
@@ -36,7 +17,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_homepage">
 
     </androidx.fragment.app.FragmentContainerView>

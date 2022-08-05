@@ -34,64 +34,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
         SharedPreferences sharedPreferences = getSharedPreferences("NSBTAS_APP_SETTINGS", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         boolean isLightThemeActive = sharedPreferences.getBoolean("isLightThemeActive", true);
         if (isLightThemeActive) {
-            topAppBar.getMenu().getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_dark_mode));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                topAppBar.getMenu().getItem(0).setIconTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.icon_tint_color));
-            }
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         } else {
-            topAppBar.getMenu().getItem(0).setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_light_mode));
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
-
-        topAppBar.setNavigationOnClickListener(view -> {
-            getSupportFragmentManager().popBackStack();
-            if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
-                topAppBar.setNavigationIcon(null);
-            }
-        });
-
-        topAppBar.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case (R.id.switchTheme):
-                    if (isLightThemeActive) {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        editor.putBoolean("isLightThemeActive", false);
-                    } else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        editor.putBoolean("isLightThemeActive", true);
-                    }
-                    editor.apply();
-                    break;
-                case (R.id.favorite):
-                case (R.id.more):
-                    break;
-            }
-            return false;
-        });
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case (R.id.page_1):
-                    topAppBar.setNavigationIcon(R.drawable.icon_back);
-                    topAppBar.setTitle("Anasayfa");
                     changeFragment(new HomepageFragment(), "HOMEPAGE_FRAGMENT");
                     break;
                 case (R.id.page_2):
-                    topAppBar.setNavigationIcon(R.drawable.icon_back);
-                    topAppBar.setTitle("Ödeme");
                     Intent intent = new Intent(this, PaymentActivity.class);
                     startActivity(intent);
                     break;
                 case (R.id.page_3):
-                    topAppBar.setNavigationIcon(R.drawable.icon_back);
-                    topAppBar.setTitle("Profil");
                     changeFragment(new ProfileFragment(), "PROFILE_FRAGMENT");
                     break;
             }
