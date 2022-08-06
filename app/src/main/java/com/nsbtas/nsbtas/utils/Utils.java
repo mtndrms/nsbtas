@@ -1,5 +1,8 @@
 package com.nsbtas.nsbtas.utils;
 
+import android.content.res.Resources;
+import android.util.TypedValue;
+
 public class Utils {
     public static String getServiceById(int id) {
         String type = "";
@@ -15,5 +18,14 @@ public class Utils {
                 break;
         }
         return type;
+    }
+
+    public static int fromDpToPx(Resources resources, float dp) {
+        float px = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                resources.getDisplayMetrics()
+        );
+        return Math.round(px);
     }
 }

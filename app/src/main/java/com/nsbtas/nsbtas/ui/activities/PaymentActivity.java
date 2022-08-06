@@ -3,7 +3,6 @@ package com.nsbtas.nsbtas.ui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -11,8 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.nsbtas.nsbtas.ui.fragments.CustomerInformationFragment;
@@ -28,15 +25,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PaymentActivity extends AppCompatActivity {
-
-    private int serviceChosen = 0;
-    private String firmName;
-    private String customerName;
-    private String phoneNumber;
-    private String emailAddress;
-    private int amount;
-    private String note;
-    private String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +45,6 @@ public class PaymentActivity extends AppCompatActivity {
         AppCompatButton btnBack = findViewById(R.id.btnBack);
         HashMap<Integer, Fragment> stages = new HashMap<>();
 
-
         AtomicInteger currentPage = new AtomicInteger(1);
         stages.put(1, new ChooseServiceFragment());
         stages.put(2, new CustomerInformationFragment());
@@ -68,14 +55,13 @@ public class PaymentActivity extends AppCompatActivity {
         tvCancel.setOnClickListener(view -> finish());
 
         btnContinue.setOnClickListener(view -> {
-            // passData(currentPage.get());
             if (currentPage.get() < 5) {
                 currentPage.getAndIncrement();
                 changeFragment(Objects.requireNonNull(stages.get(currentPage.get())).getTag(), Objects.requireNonNull(stages.get(currentPage.get())));
                 tvIndicator.setText(String.format("%d/%d", currentPage.get(), stages.size()));
             }
             if (currentPage.get() == 5) {
-                btnContinue.setText("Ödemeyi Tamamla");
+                btnContinue.setText(getString(R.string.proceed_payment));
             }
         });
 
@@ -85,7 +71,7 @@ public class PaymentActivity extends AppCompatActivity {
                 changeFragment(Objects.requireNonNull(stages.get(currentPage.get())).getTag(), Objects.requireNonNull(stages.get(currentPage.get())));
                 tvIndicator.setText(String.format("%d/%d", currentPage.get(), stages.keySet().size()));
             }
-            btnContinue.setText("Devam Et");
+            btnContinue.setText(getString(R.string.next_stage));
         });
     }
 
@@ -94,41 +80,6 @@ public class PaymentActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragmentContainer, fragment, tag);
         fragmentTransaction.addToBackStack(tag);
         fragmentTransaction.commit();
-    }
-
-    /*
-    private void passData(int currentPage) {
-        switch (currentPage) {
-            case 1:
-                ChooseServiceFragment chooseServiceFragment = (ChooseServiceFragment) getVisibleFragment();
-                this.serviceChosen = chooseServiceFragment.getServiceChosen();
-                break;
-            case 2:
-                CustomerInformationFragment customerInformationFragment = (CustomerInformationFragment) getVisibleFragment();
-                this.firmName = customerInformationFragment.getCompanyName();
-                this.customerName = customerInformationFragment.getCustomerName();
-                this.phoneNumber = customerInformationFragment.getPhoneNumber();
-                this.emailAddress = customerInformationFragment.getEmailAddress();
-                this.address = customerInformationFragment.getPhysicalAddress();
-                //this.amount = customerInformationFragment.getAmount();
-                this.note = customerInformationFragment.getNote();
-                break;
-            case 3:
-                // How to get which card is selected?
-                break;
-            case 4:
-                PlaceAmountFragment placeAmountFragment = (PlaceAmountFragment) getVisibleFragment();
-                this.amount = placeAmountFragment.getAmount();
-                break;
-            case 5:
-                ConfirmAndProceedPaymentFragment confirmAndProceedPaymentFragment = (ConfirmAndProceedPaymentFragment) getVisibleFragment();
-                break;
-        }
-    }
-     */
-
-    public void setServiceChosen(int serviceChosen) {
-        this.serviceChosen = serviceChosen;
     }
 
     public Fragment getVisibleFragment() {

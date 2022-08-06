@@ -11,26 +11,39 @@
 
     <ImageView
         android:id="@+id/ivCustomerProfilePicture"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/profile_picture_circle_around"
         android:contentDescription="@string/app_name"
         android:src="@drawable/icon_profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/glTopLimit" />
+
+    <TextView
+        android:id="@+id/labelWelcomeBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Tekrar Hoşgeldiniz"
+        android:textColor="@color/secondary_text_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/ivCustomerProfilePicture"
         app:layout_constraintTop_toBottomOf="@id/glTopLimit" />
 
     <TextView
         android:id="@+id/tvCustomerUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/poppins_semibold"
         android:text="Test User"
         android:textColor="@color/primary_text_color"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivCustomerProfilePicture" />
+        app:layout_constraintEnd_toStartOf="@id/ivCustomerProfilePicture"
+        app:layout_constraintTop_toBottomOf="@id/labelWelcomeBack" />
 
     <TextView
         android:id="@+id/labelShortcuts"

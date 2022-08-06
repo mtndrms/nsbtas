@@ -5,15 +5,17 @@ public class Card {
     private String provider;
     private String cardNumber;
     private String cardOwner;
+    private String expirationDate;
 
     public Card() {
     }
 
-    public Card(int id, String provider, String cardNumber, String cardOwner) {
+    public Card(int id, String provider, String cardNumber, String cardOwner, String expirationDate) {
         this.id = id;
         this.provider = provider;
         this.cardNumber = cardNumber;
         this.cardOwner = cardOwner;
+        this.expirationDate = expirationDate;
     }
 
     public int getId() {
@@ -46,5 +48,13 @@ public class Card {
 
     public void setCardOwner(String cardOwner) {
         this.cardOwner = cardOwner;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }

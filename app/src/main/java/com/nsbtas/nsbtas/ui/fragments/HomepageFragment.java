@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -54,6 +55,7 @@ public class HomepageFragment extends Fragment {
         LinearLayout btnServices = view.findViewById(R.id.btnServices);
         LinearLayout btnHelp = view.findViewById(R.id.btnHelp);
         LinearLayout btnMore = view.findViewById(R.id.btnMore);
+        ImageView btnProfilePicture = view.findViewById(R.id.ivCustomerProfilePicture);
 
         btnMakePayment.setOnClickListener(view1 -> {
             Intent intent = new Intent(getContext(), PaymentActivity.class);
@@ -64,6 +66,13 @@ public class HomepageFragment extends Fragment {
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse("tel:08504418818"));
             startActivity(callIntent);
+        });
+
+        btnProfilePicture.setOnClickListener(view13 -> {
+            FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainer, new ProfileFragment(), "PROFILE_FRAGMENT");
+            fragmentTransaction.addToBackStack("PROFILE_FRAGMENT");
+            fragmentTransaction.commit();
         });
 
         RecyclerView rvLatestExpenses = view.findViewById(R.id.rvLatestExpenses);

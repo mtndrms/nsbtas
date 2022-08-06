@@ -12,12 +12,23 @@ public class ExpandableListViewDataPump {
 
         List<Card> cards = new ArrayList<>();
 
-        cards.add(new Card(1, "Mastercard", "4242 4242 4242 4242", "Test Test"));
-        cards.add(new Card(2, "Mastercard", "2424 2424 2424 2424", "Test User"));
-        cards.add(new Card(3, "Mastercard", "5555 5555 5555 5555", "User Test"));
-        cards.add(new Card(4, "Visa", "1234 5678 9012 3456", "User User"));
+        cards.add(new Card(1, "Mastercard", "4242 4242 4242 4242", "Test Test", "01/01"));
+        cards.add(new Card(2, "Visa", "2424 2424 2424 2424", "Test User", "02/02"));
+        cards.add(new Card(3, "Mastercard", "5555 5555 5555 5555", "User Test", "03/03"));
+        cards.add(new Card(4, "Visa", "1234 5678 9012 3456", "User User", "04/04"));
 
         expandableListDetail.put("Kredi Kartları", cards);
         return expandableListDetail;
+    }
+
+    public static List<Card> getDataList() {
+        List<Card> cards = new ArrayList<>();
+
+        cards.add(new Card(1, "Mastercard", "4242 4242 4242 4242", "Test Test", "01/01"));
+        cards.add(new Card(2, "Visa", "2424 2424 2424 2424", "Test User", "02/02"));
+        cards.add(new Card(3, "Mastercard", "5555 5555 5555 5555", "User Test", "03/03"));
+        cards.add(new Card(4, "Visa", "1234 5678 9012 3456", "User User", "04/04"));
+
+        return cards;
     }
 }
