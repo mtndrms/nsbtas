@@ -1,5 +1,9 @@
 package com.nsbtas.nsbtas.ui.activities;
 
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.nextStage;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.previousStage;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setStages;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
@@ -18,6 +22,7 @@ import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.ui.fragments.ChooseServiceFragment;
 import com.nsbtas.nsbtas.ui.fragments.PlaceAmountFragment;
 import com.nsbtas.nsbtas.ui.fragments.SelectPaymentMethodFragment;
+import com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +36,8 @@ public class PaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
+        setStages();
+
         SharedPreferences sharedPreferences = getSharedPreferences("NSBTAS_APP_SETTINGS", Context.MODE_PRIVATE);
         boolean isLightThemeActive = sharedPreferences.getBoolean("isLightThemeActive", true);
         if (isLightThemeActive) {
@@ -43,43 +50,20 @@ public class PaymentActivity extends AppCompatActivity {
         TextView tvIndicator = findViewById(R.id.tvIndicator);
         AppCompatButton btnContinue = findViewById(R.id.btnContinue);
         AppCompatButton btnBack = findViewById(R.id.btnBack);
-        HashMap<Integer, Fragment> stages = new HashMap<>();
-
-        AtomicInteger currentPage = new AtomicInteger(1);
-        stages.put(1, new ChooseServiceFragment());
-        stages.put(2, new CustomerInformationFragment());
-        stages.put(3, new SelectPaymentMethodFragment());
-        stages.put(4, new PlaceAmountFragment());
-        stages.put(5, new ConfirmAndProceedPaymentFragment());
 
         tvCancel.setOnClickListener(view -> finish());
 
         btnContinue.setOnClickListener(view -> {
-            if (currentPage.get() < 5) {
-                currentPage.getAndIncrement();
-                changeFragment(Objects.requireNonNull(stages.get(currentPage.get())).getTag(), Objects.requireNonNull(stages.get(currentPage.get())));
-                tvIndicator.setText(String.format("%d/%d", currentPage.get(), stages.size()));
-            }
-            if (currentPage.get() == 5) {
+            nextStage(getSupportFragmentManager());
+            if (MultiStepPaymentFormHelper.getCurrentPage() == 5) {
                 btnContinue.setText(getString(R.string.proceed_payment));
             }
         });
 
         btnBack.setOnClickListener(view -> {
-            if (currentPage.get() > 1) {
-                currentPage.getAndDecrement();
-                changeFragment(Objects.requireNonNull(stages.get(currentPage.get())).getTag(), Objects.requireNonNull(stages.get(currentPage.get())));
-                tvIndicator.setText(String.format("%d/%d", currentPage.get(), stages.keySet().size()));
-            }
+            previousStage(getSupportFragmentManager());
             btnContinue.setText(getString(R.string.next_stage));
         });
-    }
-
-    private void changeFragment(String tag, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment, tag);
-        fragmentTransaction.addToBackStack(tag);
-        fragmentTransaction.commit();
     }
 
     public Fragment getVisibleFragment() {

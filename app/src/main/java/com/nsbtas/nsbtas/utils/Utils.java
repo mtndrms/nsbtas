@@ -20,7 +20,7 @@ public class Utils {
         return type;
     }
 
-    public static int fromDpToPx(Resources resources, float dp) {
+    public static int FromDpToPx(Resources resources, float dp) {
         float px = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
                 dp,

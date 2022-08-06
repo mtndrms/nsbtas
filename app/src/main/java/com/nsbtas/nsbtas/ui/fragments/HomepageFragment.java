@@ -1,6 +1,6 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
-import static com.nsbtas.nsbtas.LatestExpensesDataPump.getData;
+import static com.nsbtas.nsbtas.utils.LatestExpensesDataPump.getData;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,14 +19,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.adapters.ExpenseRecyclerViewAdapter;
-import com.nsbtas.nsbtas.models.Expense;
 import com.nsbtas.nsbtas.ui.activities.PaymentActivity;
-
-import java.util.ArrayList;
 
 public class HomepageFragment extends Fragment {
     public HomepageFragment() {

@@ -6,16 +6,18 @@ public class Card {
     private String cardNumber;
     private String cardOwner;
     private String expirationDate;
+    private String CVV;
 
     public Card() {
     }
 
-    public Card(int id, String provider, String cardNumber, String cardOwner, String expirationDate) {
+    public Card(int id, String provider, String cardNumber, String cardOwner, String expirationDate, String CVV) {
         this.id = id;
         this.provider = provider;
         this.cardNumber = cardNumber;
         this.cardOwner = cardOwner;
         this.expirationDate = expirationDate;
+        this.CVV = CVV;
     }
 
     public int getId() {
@@ -56,5 +58,13 @@ public class Card {
 
     public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public String getCVV() {
+        return CVV;
+    }
+
+    public void setCVV(String CVV) {
+        this.CVV = CVV;
     }
 }

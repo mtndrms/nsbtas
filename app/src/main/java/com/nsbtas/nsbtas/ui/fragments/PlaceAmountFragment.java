@@ -23,6 +23,7 @@ public class PlaceAmountFragment extends Fragment {
     private String emailAddress;
     private String note;
     private String address;
+    private int cardId;
 
     public PlaceAmountFragment() {
     }
@@ -46,7 +47,6 @@ public class PlaceAmountFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         amount = view.findViewById(R.id.tvAmount);
-
         getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
@@ -57,6 +57,7 @@ public class PlaceAmountFragment extends Fragment {
                 address = result.getString("address");
                 note = result.getString("note");
                 phoneNumber = result.getString("phoneNumber");
+                cardId = result.getInt("cardId");
             }
         });
     }
@@ -74,6 +75,8 @@ public class PlaceAmountFragment extends Fragment {
         result.putString("address", address);
         result.putString("note", note);
         result.putString("phoneNumber", phoneNumber);
+        result.putInt("cardId", cardId);
+        result.putString("amount", amount.getText().toString());
         getParentFragmentManager().setFragmentResult("requestKey", result);
     }
 

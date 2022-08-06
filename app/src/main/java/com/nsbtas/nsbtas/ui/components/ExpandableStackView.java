@@ -1,6 +1,6 @@
 package com.nsbtas.nsbtas.ui.components;
 
-import static com.nsbtas.nsbtas.utils.Utils.fromDpToPx;
+import static com.nsbtas.nsbtas.utils.Utils.FromDpToPx;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -52,10 +52,10 @@ public class ExpandableStackView extends MotionLayout {
             view.setId(View.generateViewId());
 
             // Card's width and height
-            startSet.constrainHeight(view.getId(), fromDpToPx(getResources(), 175));
-            endSet.constrainHeight(view.getId(), fromDpToPx(getResources(), 175));
-            startSet.constrainWidth(view.getId(), fromDpToPx(getResources(), 300));
-            endSet.constrainWidth(view.getId(), fromDpToPx(getResources(), 300));
+            startSet.constrainHeight(view.getId(), FromDpToPx(getResources(), 175));
+            endSet.constrainHeight(view.getId(), FromDpToPx(getResources(), 175));
+            startSet.constrainWidth(view.getId(), FromDpToPx(getResources(), 300));
+            endSet.constrainWidth(view.getId(), FromDpToPx(getResources(), 300));
 
             connectViewToParent(startSet, view);
             connectViewToParent(endSet, view);
@@ -66,7 +66,7 @@ public class ExpandableStackView extends MotionLayout {
                         ConstraintSet.TOP,
                         ConstraintSet.PARENT_ID,
                         ConstraintSet.TOP,
-                        fromDpToPx(getResources(), 16)
+                        FromDpToPx(getResources(), 16)
                 );
 
                 endSet.connect(
@@ -84,13 +84,13 @@ public class ExpandableStackView extends MotionLayout {
                             ConstraintSet.BOTTOM,
                             ConstraintSet.PARENT_ID,
                             ConstraintSet.BOTTOM,
-                            fromDpToPx(getResources(), 16)
+                            FromDpToPx(getResources(), 16)
                     );
                 }
 
                 int tmp;
                 if (i < 3) {
-                    tmp = fromDpToPx(getResources(), 16);
+                    tmp = FromDpToPx(getResources(), 16);
                 } else {
                     tmp = 0;
                 }
@@ -128,7 +128,7 @@ public class ExpandableStackView extends MotionLayout {
                 ConstraintSet.TOP,
                 firstView.getId(),
                 ConstraintSet.BOTTOM,
-                fromDpToPx(getResources(), 8)
+                FromDpToPx(getResources(), 8)
         );
     }
 

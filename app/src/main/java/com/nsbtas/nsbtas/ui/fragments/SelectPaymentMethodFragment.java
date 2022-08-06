@@ -1,6 +1,7 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
-import static com.nsbtas.nsbtas.ExpandableListViewDataPump.getDataList;
+import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getDataList;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCardId;
 
 import android.os.Bundle;
 
@@ -21,6 +22,14 @@ import com.nsbtas.nsbtas.ui.components.ExpandableStackView;
 import java.util.List;
 
 public class SelectPaymentMethodFragment extends Fragment {
+    private int serviceId;
+    private String firmName;
+    private String customerName;
+    private String phoneNumber;
+    private String emailAddress;
+    private String note;
+    private String address;
+
     public SelectPaymentMethodFragment() {
     }
 
@@ -47,7 +56,7 @@ public class SelectPaymentMethodFragment extends Fragment {
         ExpandableStackView expandableStackView = view.findViewById(R.id.expandable_stack);
         ImageView btnExpend = view.findViewById(R.id.ivExpend);
 
-        expandableStackView.setAdapter(new ExpandableStackViewAdapter(tmp, requireContext()));
+        expandableStackView.setAdapter(new ExpandableStackViewAdapter(tmp, requireContext(), requireActivity(), this));
 
         btnExpend.setOnClickListener(button -> {
             if (expandableStackView.getCurrentState() == expandableStackView.getStartState()) {
@@ -56,5 +65,32 @@ public class SelectPaymentMethodFragment extends Fragment {
                 expandableStackView.transitionToStart();
             }
         });
+
+        getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, result) -> {
+            serviceId = result.getInt("serviceId");
+            firmName = result.getString("companyName");
+            customerName = result.getString("customerName");
+            emailAddress = result.getString("emailAddress");
+            address = result.getString("address");
+            note = result.getString("note");
+            phoneNumber = result.getString("phoneNumber");
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Bundle result = new Bundle();
+
+        result.putInt("serviceId", serviceId);
+        result.putString("companyName", firmName);
+        result.putString("customerName", customerName);
+        result.putString("emailAddress", emailAddress);
+        result.putString("address", address);
+        result.putString("note", note);
+        result.putString("phoneNumber", phoneNumber);
+        result.putInt("cardId", getCardId());
+        getParentFragmentManager().setFragmentResult("requestKey", result);
     }
 }

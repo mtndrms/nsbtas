@@ -14,11 +14,6 @@ import android.widget.LinearLayout;
 import com.nsbtas.nsbtas.R;
 
 public class ChooseServiceFragment extends Fragment {
-    private String title;
-    private int page;
-
-    private int serviceChosen = 0;
-
     public ChooseServiceFragment() {
     }
 
@@ -34,11 +29,6 @@ public class ChooseServiceFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            title = getArguments().getString("title", "no title");
-            page = getArguments().getInt("page", 0);
-        }
     }
 
     @Override
@@ -58,23 +48,16 @@ public class ChooseServiceFragment extends Fragment {
         service1.setOnClickListener(view1 -> {
             result.putInt("serviceId", 1);
             getParentFragmentManager().setFragmentResult("requestKey", result);
-            this.serviceChosen = 1;
         });
 
         service2.setOnClickListener(view12 -> {
             result.putInt("serviceId", 2);
             getParentFragmentManager().setFragmentResult("requestKey", result);
-            this.serviceChosen = 2;
         });
 
         service3.setOnClickListener(view13 -> {
             result.putInt("serviceId", 3);
             getParentFragmentManager().setFragmentResult("requestKey", result);
-            this.serviceChosen = 3;
         });
-    }
-
-    public int getServiceChosen() {
-        return serviceChosen;
     }
 }

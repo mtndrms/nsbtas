@@ -1,5 +1,7 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
+import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getData;
+import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getDataList;
 import static com.nsbtas.nsbtas.utils.Utils.getServiceById;
 
 import android.os.Bundle;
@@ -40,19 +42,16 @@ public class ConfirmAndProceedPaymentFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TextView tvService = view.findViewById(R.id.service);
-
         TextView tvCompanyName = view.findViewById(R.id.tvCompanyName);
         TextView tvCustomerName = view.findViewById(R.id.tvCustomerName);
         TextView tvPhoneNumber = view.findViewById(R.id.tvPhoneNumber);
         TextView tvEmailAddress = view.findViewById(R.id.tvEmailAddress);
         TextView tvNote = view.findViewById(R.id.tvNote);
         TextView tvAddress = view.findViewById(R.id.tvAddress);
-
         TextView tvCardOwner = view.findViewById(R.id.tvCardOwnerInfo);
         TextView tvCardNumber = view.findViewById(R.id.tvCardNumber);
         TextView tvCardExpDate = view.findViewById(R.id.tvCardExpDate);
         TextView tvCardCVV = view.findViewById(R.id.tvCardCVV);
-
         TextView tvAmount = view.findViewById(R.id.tvAmount);
 
         getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
@@ -65,6 +64,11 @@ public class ConfirmAndProceedPaymentFragment extends Fragment {
                 tvAddress.setText(result.getString("address"));
                 tvEmailAddress.setText(result.getString("emailAddress"));
                 tvNote.setText(result.getString("note"));
+                tvAmount.setText(result.getString("amount"));
+                tvCardOwner.setText(getDataList().get(result.getInt("cardId") - 1).getCardOwner());
+                tvCardNumber.setText(getDataList().get(result.getInt("cardId") - 1).getCardNumber());
+                tvCardExpDate.setText(getDataList().get(result.getInt("cardId") - 1).getExpirationDate());
+                tvCardCVV.setText(getDataList().get(result.getInt("cardId") - 1).getCVV());
             }
         });
     }

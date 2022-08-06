@@ -1,4 +1,4 @@
-package com.nsbtas.nsbtas;
+package com.nsbtas.nsbtas.utils;
 
 import com.nsbtas.nsbtas.models.Expense;
 
