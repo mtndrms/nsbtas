@@ -17,7 +17,7 @@
         android:layout_marginEnd="25dp"
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
-        android:text="424242"
+        android:maxHeight="300dp"
         android:textColor="@color/primary_text_color"
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,10 +32,12 @@
         app:layout_constraintTop_toBottomOf="@id/tvAmount">
 
         <TextView
+            android:id="@+id/btnOne"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -46,10 +48,12 @@
             android:textSize="36sp" />
 
         <TextView
+            android:id="@+id/btnTwo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -60,10 +64,12 @@
             android:textSize="36sp" />
 
         <TextView
+            android:id="@+id/btnThree"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -73,12 +79,13 @@
             android:textColor="@color/primary_text_color"
             android:textSize="36sp" />
 
-
         <TextView
+            android:id="@+id/btnFour"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -89,10 +96,12 @@
             android:textSize="36sp" />
 
         <TextView
+            android:id="@+id/btnFive"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -103,10 +112,12 @@
             android:textSize="36sp" />
 
         <TextView
+            android:id="@+id/btnSix"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -117,10 +128,12 @@
             android:textSize="36sp" />
 
         <TextView
+            android:id="@+id/btnSeven"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -131,10 +144,12 @@
             android:textSize="36sp" />
 
         <TextView
+            android:id="@+id/btnEight"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -145,10 +160,12 @@
             android:textSize="36sp" />
 
         <TextView
+            android:id="@+id/btnNine"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -159,24 +176,28 @@
             android:textSize="36sp" />
 
         <TextView
+            android:id="@+id/btnAllClear"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
-            android:text="."
+            android:text="AC"
             android:textAlignment="center"
             android:textColor="@color/primary_text_color"
             android:textSize="36sp" />
 
         <TextView
+            android:id="@+id/btnZero"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_regular"
@@ -187,11 +208,15 @@
             android:textSize="36sp" />
 
         <ImageView
+            android:id="@+id/btnDelete"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/bg_place_amount_button_ripple_effect"
+            android:clickable="true"
             android:contentDescription="@string/app_name"
+            android:focusable="true"
             android:scaleType="center"
             android:src="@drawable/icon_back"
             app:tint="@color/primary_text_color" />

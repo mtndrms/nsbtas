@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TextInputLayoutStyle" parent="Widget.Material3.TextInputLayout.FilledBox">
+    <style name="TextInputLayoutStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
-        <item name="hintTextColor">@color/primary_text_color</item>
-        <item name="android:textColorHint">@color/primary_text_color</item>
+        <item name="hintTextColor">@color/secondary_text_color</item>
+        <item name="android:textColorHint">@color/secondary_text_color</item>
         <item name="boxStrokeColor">@color/background_secondary</item>
         <item name="boxBackgroundColor">@color/background_secondary</item>
         <item name="helperTextTextColor">@color/primary_text_color</item>
         <item name="counterTextColor">@color/primary_text_color</item>
         <item name="errorEnabled">true</item>
-        <item name="startIconTint">@color/primary_text_color</item>
+        <item name="startIconTint">@color/secondary_text_color</item>
         <item name="endIconTint">@color/primary_text_color</item>
         <item name="android:layout_marginStart">25dp</item>
         <item name="android:layout_marginEnd">25dp</item>

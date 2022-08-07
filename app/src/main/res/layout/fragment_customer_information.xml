@@ -18,11 +18,13 @@
             android:id="@+id/etCompanyName"
             style="@style/TextInputLayoutStyle"
             android:hint="@string/company_name"
-            app:endIconMode="clear_text">
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/icon_abc">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:textColor="@color/primary_text_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -31,7 +33,7 @@
             style="@style/TextInputLayoutStyle"
             android:hint="@string/customer_name"
             app:endIconMode="clear_text"
-            app:errorEnabled="true">
+            app:startIconDrawable="@drawable/icon_profile">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -45,7 +47,7 @@
             style="@style/TextInputLayoutStyle"
             android:hint="@string/phone_number"
             app:endIconMode="clear_text"
-            app:errorEnabled="true">
+            app:startIconDrawable="@drawable/icon_contact">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -58,13 +60,14 @@
             android:id="@+id/etEmailAddress"
             style="@style/TextInputLayoutStyle"
             android:hint="@string/e_mail_address"
-            app:endIconMode="clear_text">
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/icon_email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/primary_text_color" />
+                android:textColor="@color/secondary_text_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +75,7 @@
             style="@style/TextInputLayoutStyle"
             android:hint="@string/your_note"
             app:endIconMode="clear_text"
-            app:errorEnabled="true">
+            app:startIconDrawable="@drawable/icon_note">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -86,7 +89,7 @@
             style="@style/TextInputLayoutStyle"
             android:hint="@string/your_address"
             app:endIconMode="clear_text"
-            app:errorEnabled="true">
+            app:startIconDrawable="@drawable/icon_address">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
