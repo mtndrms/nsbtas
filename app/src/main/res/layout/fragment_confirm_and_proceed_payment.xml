@@ -15,19 +15,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Girdiğiniz bilgileri kontrol edin ve ödemeyi tamamlayın"
-            android:textAlignment="center"
-            android:textColor="@color/primary_text_color"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"

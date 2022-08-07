@@ -17,6 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MultiStepPaymentFormHelper {
     private static final HashMap<Integer, Fragment> stages = new HashMap<>();
+    private static final HashMap<Integer, String> titles = new HashMap<>();
     private static final AtomicInteger currentPage = new AtomicInteger(1);
     public static int cardId;
 
@@ -26,6 +27,16 @@ public class MultiStepPaymentFormHelper {
         stages.put(3, new SelectPaymentMethodFragment());
         stages.put(4, new PlaceAmountFragment());
         stages.put(5, new ConfirmAndProceedPaymentFragment());
+
+        titles.put(1, "Servis seçin");
+        titles.put(2, "Bilgilerinizi girin");
+        titles.put(3, "Kart seçin");
+        titles.put(4, "Ödenecek tutarı girin");
+        titles.put(5, "Girdiğiniz bilgileri kontrol edin\nve ödemeyi tamamlayın");
+    }
+
+    public static String getCurrentStageTitle() {
+        return titles.get(currentPage.get());
     }
 
     public static void nextStage(FragmentManager fragmentManager) {
@@ -63,5 +74,9 @@ public class MultiStepPaymentFormHelper {
 
     public static void setCurrentPage(int page) {
         currentPage.set(page);
+    }
+
+    public static void reset() {
+        currentPage.set(1);
     }
 }

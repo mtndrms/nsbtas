@@ -1,4 +1,4 @@
-package com.nsbtas.nsbtas.ui.components;
+package com.nsbtas.nsbtas.ui.views;
 
 import static com.nsbtas.nsbtas.utils.Utils.FromDpToPx;
 
@@ -17,7 +17,6 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import java.util.ArrayList;
 
 public class ExpandableStackView extends MotionLayout {
-
     private Context context;
     private AttributeSet attrs = null;
     private int defStyleAttr = 0;
@@ -37,10 +36,12 @@ public class ExpandableStackView extends MotionLayout {
     public void setAdapter(BaseAdapter adapter) {
         MotionScene scene = new MotionScene(this);
 
+        // Constrains before transition
         int startSetId = View.generateViewId();
         ConstraintSet startSet = new ConstraintSet();
         startSet.clone(this);
 
+        // Constrains after transition
         int endSetId = View.generateViewId();
         ConstraintSet endSet = new ConstraintSet();
         endSet.clone(this);
@@ -57,9 +58,11 @@ public class ExpandableStackView extends MotionLayout {
             startSet.constrainWidth(view.getId(), FromDpToPx(getResources(), 300));
             endSet.constrainWidth(view.getId(), FromDpToPx(getResources(), 300));
 
+            // Constrain card to parent view's start & end
             connectViewToParent(startSet, view);
             connectViewToParent(endSet, view);
 
+            // Constrain first card to top of it's parent
             if (i == 0) {
                 startSet.connect(
                         view.getId(),
@@ -68,7 +71,6 @@ public class ExpandableStackView extends MotionLayout {
                         ConstraintSet.TOP,
                         FromDpToPx(getResources(), 16)
                 );
-
                 endSet.connect(
                         view.getId(),
                         ConstraintSet.TOP,
@@ -76,8 +78,11 @@ public class ExpandableStackView extends MotionLayout {
                         ConstraintSet.TOP
                 );
             } else {
+                // Others will be constrained to last card
                 View last = views.get(i - 1);
                 boundTwoViewEnd(endSet, last, view);
+
+                // Last card's position after the transition
                 if (i == adapter.getCount() - 1) {
                     endSet.connect(
                             view.getId(),
@@ -88,10 +93,13 @@ public class ExpandableStackView extends MotionLayout {
                     );
                 }
 
+                // First 3 card should be visible as stack
                 int tmp;
                 if (i < 3) {
                     tmp = FromDpToPx(getResources(), 16);
-                } else {
+                }
+                // Others will be on top of each other
+                else {
                     tmp = 0;
                 }
 
@@ -100,6 +108,7 @@ public class ExpandableStackView extends MotionLayout {
             views.add(view);
         }
 
+        // Add cards to ConstraintLayout with reverse order
         for (int j = views.size() - 1; j >= 0; j--) {
             addView(views.get(j));
         }
@@ -122,6 +131,7 @@ public class ExpandableStackView extends MotionLayout {
         setTransition(transitionId);
     }
 
+    // End position of two card (aka. after transition)
     private void boundTwoViewEnd(ConstraintSet constraintSet, View firstView, View secondView) {
         constraintSet.connect(
                 secondView.getId(),
@@ -132,6 +142,8 @@ public class ExpandableStackView extends MotionLayout {
         );
     }
 
+    // Start position of two card (aka. before transition)
+    // Margin will give stack effect
     private void boundTwoViewStart(ConstraintSet constraintSet, View firstView, View secondView, int marginBottom) {
         constraintSet.connect(
                 secondView.getId(),

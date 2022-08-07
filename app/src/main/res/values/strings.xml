@@ -35,4 +35,5 @@
     <string name="login_to_your_account">Hesabınıza giriş yapın</string>
     <string name="your_saved_cards">Kayıtlı kartlarınız</string>
     <string name="saved_payment_methods">Kayıtlı ödeme yöntemleri</string>
+    <string name="choose_service">Servis seçin</string>
 </resources>

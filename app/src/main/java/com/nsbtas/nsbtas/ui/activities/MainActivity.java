@@ -23,6 +23,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.nsbtas.nsbtas.ui.fragments.HomepageFragment;
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.ui.fragments.ProfileFragment;
+import com.nsbtas.nsbtas.utils.Utils;
 
 import java.util.List;
 
@@ -34,14 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        SharedPreferences sharedPreferences = getSharedPreferences("NSBTAS_APP_SETTINGS", Context.MODE_PRIVATE);
 
-        boolean isLightThemeActive = sharedPreferences.getBoolean("isLightThemeActive", true);
-        if (isLightThemeActive) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
+        Utils.setTheme(this);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -60,10 +55,18 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        bottomNavigationView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-
+        bottomNavigationView.setOnItemReselectedListener(item -> {
+            switch (item.getItemId()) {
+                case (R.id.page_1):
+                    changeFragment(new HomepageFragment(), "HOMEPAGE_FRAGMENT");
+                    break;
+                case (R.id.page_2):
+                    Intent intent = new Intent(this, PaymentActivity.class);
+                    startActivity(intent);
+                    break;
+                case (R.id.page_3):
+                    changeFragment(new ProfileFragment(), "PROFILE_FRAGMENT");
+                    break;
             }
         });
     }

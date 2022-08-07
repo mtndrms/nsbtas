@@ -3,6 +3,7 @@ package com.nsbtas.nsbtas.ui.fragments;
 import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getDataList;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCardId;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,8 @@ import android.widget.ImageView;
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.adapters.ExpandableStackViewAdapter;
 import com.nsbtas.nsbtas.models.Card;
-import com.nsbtas.nsbtas.ui.components.ExpandableStackView;
+import com.nsbtas.nsbtas.ui.activities.AddNewCardActivity;
+import com.nsbtas.nsbtas.ui.views.ExpandableStackView;
 
 import java.util.List;
 
@@ -51,12 +53,13 @@ public class SelectPaymentMethodFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<Card> tmp = getDataList();
+        List<Card> data = getDataList();
 
         ExpandableStackView expandableStackView = view.findViewById(R.id.expandable_stack);
         ImageView btnExpend = view.findViewById(R.id.ivExpend);
+        ImageView btnAddNewCard = view.findViewById(R.id.ivAddNewCard);
 
-        expandableStackView.setAdapter(new ExpandableStackViewAdapter(tmp, requireContext(), requireActivity(), this));
+        expandableStackView.setAdapter(new ExpandableStackViewAdapter(data, requireContext(), this));
 
         btnExpend.setOnClickListener(button -> {
             if (expandableStackView.getCurrentState() == expandableStackView.getStartState()) {
@@ -64,6 +67,11 @@ public class SelectPaymentMethodFragment extends Fragment {
             } else {
                 expandableStackView.transitionToStart();
             }
+        });
+
+        btnAddNewCard.setOnClickListener(view1 -> {
+            Intent intent = new Intent(requireActivity(), AddNewCardActivity.class);
+            startActivity(intent);
         });
 
         getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, result) -> {

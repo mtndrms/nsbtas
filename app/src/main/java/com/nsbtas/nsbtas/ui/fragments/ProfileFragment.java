@@ -18,8 +18,6 @@ import android.widget.ImageView;
 
 import com.nsbtas.nsbtas.R;
 
-import java.util.Objects;
-
 public class ProfileFragment extends Fragment {
     public ProfileFragment() {
     }

@@ -1,6 +1,5 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
-import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getData;
 import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getDataList;
 import static com.nsbtas.nsbtas.utils.Utils.getServiceById;
 
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,22 +52,19 @@ public class ConfirmAndProceedPaymentFragment extends Fragment {
         TextView tvCardCVV = view.findViewById(R.id.tvCardCVV);
         TextView tvAmount = view.findViewById(R.id.tvAmount);
 
-        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                tvService.setText(getServiceById(result.getInt("serviceId")));
-                tvCompanyName.setText(result.getString("companyName"));
-                tvCustomerName.setText(result.getString("customerName"));
-                tvPhoneNumber.setText(result.getString("phoneNumber"));
-                tvAddress.setText(result.getString("address"));
-                tvEmailAddress.setText(result.getString("emailAddress"));
-                tvNote.setText(result.getString("note"));
-                tvAmount.setText(result.getString("amount"));
-                tvCardOwner.setText(getDataList().get(result.getInt("cardId") - 1).getCardOwner());
-                tvCardNumber.setText(getDataList().get(result.getInt("cardId") - 1).getCardNumber());
-                tvCardExpDate.setText(getDataList().get(result.getInt("cardId") - 1).getExpirationDate());
-                tvCardCVV.setText(getDataList().get(result.getInt("cardId") - 1).getCVV());
-            }
+        getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, result) -> {
+            tvService.setText(getServiceById(result.getInt("serviceId")));
+            tvCompanyName.setText(result.getString("companyName"));
+            tvCustomerName.setText(result.getString("customerName"));
+            tvPhoneNumber.setText(result.getString("phoneNumber"));
+            tvAddress.setText(result.getString("address"));
+            tvEmailAddress.setText(result.getString("emailAddress"));
+            tvNote.setText(result.getString("note"));
+            tvAmount.setText(result.getString("amount"));
+            tvCardOwner.setText(getDataList().get(result.getInt("cardId") - 1).getCardOwner());
+            tvCardNumber.setText(getDataList().get(result.getInt("cardId") - 1).getCardNumber());
+            tvCardExpDate.setText(getDataList().get(result.getInt("cardId") - 1).getExpirationDate());
+            tvCardCVV.setText(getDataList().get(result.getInt("cardId") - 1).getCVV());
         });
     }
 }

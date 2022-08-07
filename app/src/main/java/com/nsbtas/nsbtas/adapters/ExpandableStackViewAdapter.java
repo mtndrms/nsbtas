@@ -14,11 +14,9 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.models.Card;
-import com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper;
 
 import java.util.List;
 
@@ -26,22 +24,11 @@ public class ExpandableStackViewAdapter extends BaseAdapter {
 
     private List<Card> models;
     private Context context;
-    private final FragmentActivity activity;
     private final Fragment fragment;
 
-    private int serviceId;
-    private String firmName;
-    private String customerName;
-    private String phoneNumber;
-    private String emailAddress;
-    private String note;
-    private String address;
-    private int cardId;
-
-    public ExpandableStackViewAdapter(List<Card> models, Context context, FragmentActivity activity, Fragment fragment) {
+    public ExpandableStackViewAdapter(List<Card> models, Context context, Fragment fragment) {
         this.models = models;
         this.context = context;
-        this.activity = activity;
         this.fragment = fragment;
     }
 
@@ -72,6 +59,7 @@ public class ExpandableStackViewAdapter extends BaseAdapter {
         tvCardOwnerInfo.setText(models.get(position).getCardOwner());
         tvCardNumber.setText(models.get(position).getCardNumber());
         tvExpirationDate.setText(models.get(position).getExpirationDate());
+
         if (models.get(position).getProvider().equals("Visa")) {
             cardContainer.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_card_visa));
             ivCardProvider.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.logo_visa));
@@ -82,19 +70,8 @@ public class ExpandableStackViewAdapter extends BaseAdapter {
             cardContainer.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_card_none));
         }
 
-        fragment.getParentFragmentManager().setFragmentResultListener("requestKey", fragment, (requestKey, result) -> {
-            serviceId = result.getInt("serviceId");
-            firmName = result.getString("companyName");
-            customerName = result.getString("customerName");
-            emailAddress = result.getString("emailAddress");
-            address = result.getString("address");
-            note = result.getString("note");
-            phoneNumber = result.getString("phoneNumber");
-        });
-
         cardContainer.setOnClickListener(card -> {
             setCardId(models.get(position).getId());
-            MultiStepPaymentFormHelper.setCurrentPage(MultiStepPaymentFormHelper.getCurrentPage() + 1);
             nextStage(fragment.getParentFragmentManager());
         });
 

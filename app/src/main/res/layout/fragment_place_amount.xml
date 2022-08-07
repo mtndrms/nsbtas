@@ -9,18 +9,6 @@
     tools:context=".ui.fragments.PlaceAmountFragment">
 
     <TextView
-        android:id="@+id/label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:text="Ödenecek miktarı girin"
-        android:textColor="@color/primary_text_color"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/tvAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +21,7 @@
         android:textColor="@color/primary_text_color"
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <GridLayout
         android:layout_width="match_parent"
@@ -205,6 +193,7 @@
             android:layout_columnWeight="1"
             android:contentDescription="@string/app_name"
             android:scaleType="center"
-            android:src="@drawable/icon_back" />
+            android:src="@drawable/icon_back"
+            app:tint="@color/primary_text_color" />
     </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

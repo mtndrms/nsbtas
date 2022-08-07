@@ -2,25 +2,23 @@ package com.nsbtas.nsbtas.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.nsbtas.nsbtas.R;
+import com.nsbtas.nsbtas.utils.Utils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,19 +27,18 @@ import java.util.Objects;
 public class AddNewCardActivity extends AppCompatActivity {
     boolean isFront = true;
     boolean isTransactionAlreadyHappened = false;
+    AnimatorSet front_animation;
+    AnimatorSet back_animation;
+    LinearLayout cardFront;
+    LinearLayout cardBack;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_card);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("NSBTAS_APP_SETTINGS", Context.MODE_PRIVATE);
-        boolean isLightThemeActive = sharedPreferences.getBoolean("isLightThemeActive", true);
-        if (isLightThemeActive) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
+        Utils.setTheme(this);
 
         ImageView btnBack = findViewById(R.id.btnBack);
         TextInputLayout etCardNumber = findViewById(R.id.etCardNumber);
@@ -52,20 +49,20 @@ public class AddNewCardActivity extends AppCompatActivity {
         TextView tvCardOwnerInfo = findViewById(R.id.tvCardOwnerInfo);
         TextView tvExpirationDate = findViewById(R.id.tvExpirationDate);
         TextView tvCVV = findViewById(R.id.tvCVV);
-        LinearLayout cardFront = findViewById(R.id.cardFront);
-        LinearLayout cardBack = findViewById(R.id.cardBack);
+        cardFront = findViewById(R.id.cardFront);
+        cardBack = findViewById(R.id.cardBack);
         ImageView ivLogo = findViewById(R.id.ivLogo);
+
+        front_animation = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.card_turn_front_animator);
+        back_animation = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.card_turn_back_animator);
 
         List<TextInputLayout> requiredFields = Arrays.asList(etCardNumber, etCardOwnerInfo, etExpirationDate, etCVV);
 
-        AnimatorSet front_animation = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.card_turn_front_animator);
-        AnimatorSet back_animation = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.card_turn_back_animator);
-
         btnBack.setOnClickListener(view -> finish());
 
+        // Format card number (eg. 4242 4242 4242 4242)
         Objects.requireNonNull(etCardNumber.getEditText()).addTextChangedListener(new TextWatcher() {
             private static final int TOTAL_SYMBOLS = 19;
-
             private static final int TOTAL_DIGITS = 16;
             private static final int DIVIDER_MODULO = 5;
             private static final int DIVIDER_POSITION = DIVIDER_MODULO - 1;
@@ -73,13 +70,6 @@ public class AddNewCardActivity extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (!isFront) {
-                    front_animation.setTarget(cardBack);
-                    back_animation.setTarget(cardFront);
-                    back_animation.start();
-                    front_animation.start();
-                    isFront = true;
-                }
             }
 
             @Override
@@ -158,13 +148,6 @@ public class AddNewCardActivity extends AppCompatActivity {
         Objects.requireNonNull(etCardOwnerInfo.getEditText()).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!isFront) {
-                    front_animation.setTarget(cardBack);
-                    back_animation.setTarget(cardFront);
-                    back_animation.start();
-                    front_animation.start();
-                    isFront = true;
-                }
             }
 
             @Override
@@ -181,13 +164,6 @@ public class AddNewCardActivity extends AppCompatActivity {
         Objects.requireNonNull(etExpirationDate.getEditText()).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!isFront) {
-                    front_animation.setTarget(cardBack);
-                    back_animation.setTarget(cardFront);
-                    back_animation.start();
-                    front_animation.start();
-                    isFront = true;
-                }
             }
 
             @Override
@@ -204,13 +180,6 @@ public class AddNewCardActivity extends AppCompatActivity {
         Objects.requireNonNull(etCVV.getEditText()).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (isFront) {
-                    front_animation.setTarget(cardFront);
-                    back_animation.setTarget(cardBack);
-                    front_animation.start();
-                    back_animation.start();
-                    isFront = false;
-                }
             }
 
             @Override
@@ -223,5 +192,49 @@ public class AddNewCardActivity extends AppCompatActivity {
 
             }
         });
+
+        etCardNumber.getEditText().setOnTouchListener((view, motionEvent) -> {
+            if (!isFront) {
+                turnCardFront();
+            }
+            return false;
+        });
+
+        etCardOwnerInfo.getEditText().setOnTouchListener((view, motionEvent) -> {
+            if (!isFront) {
+                turnCardFront();
+            }
+            return false;
+        });
+
+        etExpirationDate.getEditText().setOnTouchListener((view, motionEvent) -> {
+            if (!isFront) {
+                turnCardFront();
+            }
+            return false;
+        });
+
+        etCVV.getEditText().setOnTouchListener((view, motionEvent) -> {
+            if (isFront) {
+                turnCardBack();
+            }
+            return false;
+        });
+    }
+
+    private void turnCardBack() {
+        front_animation.setTarget(cardFront);
+        back_animation.setTarget(cardBack);
+        front_animation.start();
+        back_animation.start();
+        isFront = false;
+    }
+
+    private void turnCardFront() {
+        front_animation.setTarget(cardBack);
+        back_animation.setTarget(cardFront);
+        front_animation.start();
+        back_animation.start();
+        isFront = true;
     }
 }

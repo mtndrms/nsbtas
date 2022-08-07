@@ -11,36 +11,37 @@
         android:layout_height="wrap_content"
         tools:context=".ui.fragments.SelectPaymentMethodFragment">
 
-        <TextView
-            android:id="@+id/tvLabelSavedPaymentMethods"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/saved_payment_methods"
-            android:textColor="@color/primary_text_color"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/ivExpend"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginTop="25dp"
             android:clickable="true"
             android:contentDescription="@string/app_name"
             android:focusable="true"
             android:src="@drawable/icon_down_arrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLabelSavedPaymentMethods"
+            app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/secondary_text_color" />
 
-        <com.nsbtas.nsbtas.ui.components.ExpandableStackView
+        <com.nsbtas.nsbtas.ui.views.ExpandableStackView
             android:id="@+id/expandable_stack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/ivExpend" />
+
+        <ImageView
+            android:id="@+id/ivAddNewCard"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="25dp"
+            android:clickable="true"
+            android:contentDescription="@string/app_name"
+            android:focusable="true"
+            android:src="@drawable/icon_add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/icon_tint_color" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

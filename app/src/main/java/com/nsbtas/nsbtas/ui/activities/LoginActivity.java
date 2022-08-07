@@ -15,6 +15,7 @@ import android.view.WindowManager;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.nsbtas.nsbtas.R;
+import com.nsbtas.nsbtas.utils.Utils;
 
 import java.util.Objects;
 
@@ -25,13 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("NSBTAS_APP_SETTINGS", Context.MODE_PRIVATE);
-        boolean isLightThemeActive = sharedPreferences.getBoolean("isLightThemeActive", true);
-        if (isLightThemeActive) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
+        Utils.setTheme(this);
 
         AppCompatButton btnLogIn = findViewById(R.id.btnLogIn);
         TextInputLayout etUsername = findViewById(R.id.etUsername);
