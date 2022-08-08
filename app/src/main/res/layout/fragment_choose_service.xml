@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.fragments.ChooseServiceFragment"
     tools:ignore="UseCompoundDrawables">
-    
+
     <LinearLayout
         android:id="@+id/service1"
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
-        android:background="@drawable/bg_icon"
+        android:background="@drawable/bg_service_transition"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical">
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:gravity="center">
 
@@ -59,7 +59,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum sapien vitae magna imperdiet, non tincidunt orci laoreet. Etiam id magna et mauris vulputate euismod ut vel eros."
             android:textColor="@color/secondary_text_color"
@@ -73,7 +73,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
-        android:background="@drawable/bg_icon"
+        android:background="@drawable/bg_service_transition"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical">
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:gravity="center">
 
@@ -117,7 +117,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:text="Nullam aliquet vel metus auctor congue. Suspendisse id felis eget nulla congue mollis fringilla nec ex."
             android:textColor="@color/secondary_text_color"
@@ -131,7 +131,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
-        android:background="@drawable/bg_icon"
+        android:background="@drawable/bg_service_transition"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical">
@@ -140,7 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:gravity="center">
 
@@ -175,7 +175,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:text="Phasellus massa velit, pulvinar et justo at, sollicitudin tempus quam."
             android:textColor="@color/secondary_text_color"

@@ -1,6 +1,5 @@
 package com.nsbtas.nsbtas.ui.activities;
 
-import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCurrentPage;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCurrentStageTitle;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.nextStage;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.previousStage;

@@ -1,10 +1,10 @@
 package com.nsbtas.nsbtas.utils;
 
+import static com.nsbtas.nsbtas.utils.Utils.changeFragment;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.ui.fragments.ChooseServiceFragment;
 import com.nsbtas.nsbtas.ui.fragments.ConfirmAndProceedPaymentFragment;
 import com.nsbtas.nsbtas.ui.fragments.CustomerInformationFragment;
@@ -20,6 +20,7 @@ public class MultiStepPaymentFormHelper {
     private static final HashMap<Integer, String> titles = new HashMap<>();
     private static final AtomicInteger currentPage = new AtomicInteger(1);
     public static int cardId;
+    private static int transitionId;
 
     public static void setStages() {
         stages.put(1, new ChooseServiceFragment());
@@ -53,11 +54,12 @@ public class MultiStepPaymentFormHelper {
         }
     }
 
-    private static void changeFragment(String tag, Fragment fragment, FragmentManager fragmentManager) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment, tag);
-        fragmentTransaction.addToBackStack(tag);
-        fragmentTransaction.commit();
+    public static int getTransitionId() {
+        return transitionId;
+    }
+
+    public static void setTransitionId(int transitionId) {
+        MultiStepPaymentFormHelper.transitionId = transitionId;
     }
 
     public static int getCardId() {

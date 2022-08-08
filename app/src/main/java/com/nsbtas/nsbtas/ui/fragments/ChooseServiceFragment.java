@@ -1,5 +1,6 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,11 @@ import android.widget.LinearLayout;
 
 import com.nsbtas.nsbtas.R;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class ChooseServiceFragment extends Fragment {
+    AtomicBoolean isTransitionAlreadyHappened = new AtomicBoolean(false);
+
     public ChooseServiceFragment() {
     }
 
@@ -43,21 +48,37 @@ public class ChooseServiceFragment extends Fragment {
         LinearLayout service1 = view.findViewById(R.id.service1);
         LinearLayout service2 = view.findViewById(R.id.service2);
         LinearLayout service3 = view.findViewById(R.id.service3);
+        TransitionDrawable transition1 = (TransitionDrawable) service1.getBackground();
+        TransitionDrawable transition2 = (TransitionDrawable) service2.getBackground();
+        TransitionDrawable transition3 = (TransitionDrawable) service3.getBackground();
         Bundle result = new Bundle();
 
         service1.setOnClickListener(view1 -> {
+            makeTransitionOnSelect(transition1);
             result.putInt("serviceId", 1);
             getParentFragmentManager().setFragmentResult("requestKey", result);
         });
 
         service2.setOnClickListener(view12 -> {
+            makeTransitionOnSelect(transition2);
             result.putInt("serviceId", 2);
             getParentFragmentManager().setFragmentResult("requestKey", result);
         });
 
         service3.setOnClickListener(view13 -> {
+            makeTransitionOnSelect(transition3);
             result.putInt("serviceId", 3);
             getParentFragmentManager().setFragmentResult("requestKey", result);
         });
+    }
+
+    private void makeTransitionOnSelect(TransitionDrawable transitionDrawable) {
+        if (isTransitionAlreadyHappened.get()) {
+            isTransitionAlreadyHappened.set(false);
+            transitionDrawable.reverseTransition(100);
+        } else {
+            isTransitionAlreadyHappened.set(true);
+            transitionDrawable.startTransition(100);
+        }
     }
 }

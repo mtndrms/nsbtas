@@ -16,7 +16,6 @@ import com.nsbtas.nsbtas.R;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlaceAmountFragment extends Fragment {
     TextView amount;
@@ -64,7 +63,7 @@ public class PlaceAmountFragment extends Fragment {
         TextView btnAllClear = view.findViewById(R.id.btnAllClear);
         ImageView btnDelete = view.findViewById(R.id.btnDelete);
 
-        List<TextView> numpad = Arrays.asList(btnZero, btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine);
+        List<TextView> numPad = Arrays.asList(btnZero, btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine);
 
         getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, result) -> {
             serviceId = result.getInt("serviceId");
@@ -77,22 +76,11 @@ public class PlaceAmountFragment extends Fragment {
             cardId = result.getInt("cardId");
         });
 
-        AtomicInteger dot = new AtomicInteger(3);
-        for (TextView button : numpad) {
-            button.setOnClickListener(btn -> {
-                dot.getAndDecrement();
-                amount.setText(amount.getText().toString().concat(button.getText().toString()));
-                if (dot.get() == 0) {
-                    amount.setText(amount.getText().toString().concat("."));
-                    dot.set(3);
-                }
-            });
+        for (TextView button : numPad) {
+            button.setOnClickListener(btn -> amount.setText(amount.getText().toString().concat(button.getText().toString())));
         }
 
-        btnAllClear.setOnClickListener(btnAC -> {
-            dot.set(3);
-            amount.setText(null);
-        });
+        btnAllClear.setOnClickListener(btnAC -> amount.setText(null));
 
         btnDelete.setOnClickListener(del -> {
             if (amount.getText().toString().length() > 0) {
@@ -117,9 +105,5 @@ public class PlaceAmountFragment extends Fragment {
         result.putInt("cardId", cardId);
         result.putString("amount", amount.getText().toString());
         getParentFragmentManager().setFragmentResult("requestKey", result);
-    }
-
-    public int getAmount() {
-        return Integer.parseInt(amount.getText().toString());
     }
 }

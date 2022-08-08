@@ -4,22 +4,27 @@ import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getDataList;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCardId;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.adapters.ExpandableStackViewAdapter;
 import com.nsbtas.nsbtas.models.Card;
 import com.nsbtas.nsbtas.ui.activities.AddNewCardActivity;
 import com.nsbtas.nsbtas.ui.views.ExpandableStackView;
+import com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper;
 
 import java.util.List;
 
@@ -49,6 +54,7 @@ public class SelectPaymentMethodFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_select_payment_method, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -56,17 +62,12 @@ public class SelectPaymentMethodFragment extends Fragment {
         List<Card> data = getDataList();
 
         ExpandableStackView expandableStackView = view.findViewById(R.id.expandable_stack);
-        ImageView btnExpend = view.findViewById(R.id.ivExpend);
-        ImageView btnAddNewCard = view.findViewById(R.id.ivAddNewCard);
+        TextView btnAddNewCard = view.findViewById(R.id.tvAddNewCard);
 
-        expandableStackView.setAdapter(new ExpandableStackViewAdapter(data, requireContext(), this));
+        expandableStackView.setAdapter(new ExpandableStackViewAdapter(data, requireContext(), this, expandableStackView));
 
-        btnExpend.setOnClickListener(button -> {
-            if (expandableStackView.getCurrentState() == expandableStackView.getStartState()) {
-                expandableStackView.transitionToEnd();
-            } else {
-                expandableStackView.transitionToStart();
-            }
+        expandableStackView.transitionToEnd(() -> {
+            expandableStackView.setTransition(MultiStepPaymentFormHelper.getTransitionId());
         });
 
         btnAddNewCard.setOnClickListener(view1 -> {
