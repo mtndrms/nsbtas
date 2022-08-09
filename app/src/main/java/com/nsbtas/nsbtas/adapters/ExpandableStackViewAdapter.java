@@ -2,6 +2,7 @@ package com.nsbtas.nsbtas.adapters;
 
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.nextStage;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setCardId;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setTransitionId;
 
 import android.content.Context;
 import android.os.Handler;
@@ -61,25 +62,6 @@ public class ExpandableStackViewAdapter extends BaseAdapter {
         TextView tvCardNumber = view.findViewById(R.id.tvCardNumber);
         TextView tvExpirationDate = view.findViewById(R.id.tvExpirationDate);
         ImageView ivCardProvider = view.findViewById(R.id.ivLogo);
-        Animation animationMove = AnimationUtils.loadAnimation(fragment.requireContext(), R.anim.move);
-
-        /*
-        animationMove.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                setCardId(models.get(position).getId());
-                nextStage(fragment.getParentFragmentManager());
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
-         */
 
         tvCardOwnerInfo.setText(models.get(position).getCardOwner());
         tvCardNumber.setText(models.get(position).getCardNumber());
@@ -96,11 +78,10 @@ public class ExpandableStackViewAdapter extends BaseAdapter {
         }
 
         cardContainer.setOnClickListener(card -> {
-            expandableStackView.transitionToStart();
-            new Handler().postDelayed(() -> {
+            expandableStackView.transitionToEnd(() -> {
                 setCardId(models.get(position).getId());
                 nextStage(fragment.getParentFragmentManager());
-            }, 600);
+            });
         });
 
         return view;

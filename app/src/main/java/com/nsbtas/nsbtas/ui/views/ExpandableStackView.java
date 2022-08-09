@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.motion.widget.MotionScene;
 import androidx.constraintlayout.motion.widget.TransitionBuilder;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper;
@@ -24,7 +23,8 @@ public class ExpandableStackView extends MotionLayout {
     private Context context;
     private AttributeSet attrs = null;
     private int defStyleAttr = 0;
-    private BaseAdapter adapter;
+    private int rotationSide = 1;
+    private final int rotationRate = 5;
 
     public ExpandableStackView(@NonNull Context context) {
         super(context);
@@ -39,7 +39,6 @@ public class ExpandableStackView extends MotionLayout {
     }
 
     public void setAdapter(BaseAdapter adapter) {
-        this.adapter = adapter;
         MotionScene scene = new MotionScene(this);
 
         // Constrains before transition
@@ -82,13 +81,15 @@ public class ExpandableStackView extends MotionLayout {
                         view.getId(),
                         ConstraintSet.TOP,
                         ConstraintSet.PARENT_ID,
-                        ConstraintSet.TOP
+                        ConstraintSet.TOP,
+                        fromDpToPx(getResources(), 16)
                 );
                 middleSet.connect(
                         view.getId(),
                         ConstraintSet.TOP,
                         ConstraintSet.PARENT_ID,
-                        ConstraintSet.TOP
+                        ConstraintSet.TOP,
+                        fromDpToPx(getResources(), 16)
                 );
             } else {
                 // Others will be constrained to card before
@@ -105,24 +106,12 @@ public class ExpandableStackView extends MotionLayout {
                             fromDpToPx(getResources(), 16)
                     );
                 }
-
-                // First 3 card should be visible as stack
-                int tmp;
-                if (i < 3) {
-                    tmp = fromDpToPx(getResources(), 16);
-                }
-                // Others will be on top of each other
-                else {
-                    tmp = 0;
-                }
             }
-            endSet.connect(
-                    view.getId(),
-                    ConstraintSet.TOP,
-                    ConstraintSet.PARENT_ID,
-                    ConstraintSet.BOTTOM
-            );
+            boundViewEnd(endSet, view);
+            middleSet.setRotation(view.getId(), rotationSide * rotationRate);
+            endSet.setRotation(view.getId(), rotationSide * -1 * rotationRate);
             views.add(view);
+            rotationSide *= -1;
         }
 
         // Add cards to ConstraintLayout with reverse order
@@ -161,16 +150,12 @@ public class ExpandableStackView extends MotionLayout {
         setTransition(transitionFirstPartId);
     }
 
-    public BaseAdapter getAdapter() {
-        return adapter;
-    }
-
-    private void boundTwoViewEnd(ConstraintSet constraintSet, View view) {
+    private void boundViewEnd(ConstraintSet constraintSet, View view) {
         constraintSet.connect(
                 view.getId(),
                 ConstraintSet.TOP,
                 ConstraintSet.PARENT_ID,
-                ConstraintSet.TOP
+                ConstraintSet.BOTTOM
         );
     }
 
