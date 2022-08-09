@@ -66,7 +66,7 @@ public class SelectPaymentMethodFragment extends Fragment {
 
         expandableStackView.setAdapter(new ExpandableStackViewAdapter(data, requireContext(), this, expandableStackView));
 
-        expandableStackView.transitionToEnd(() -> expandableStackView.setTransition(getTransitionId()));
+        expandableStackView.transitionToEnd();
 
         getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, result) -> {
             serviceId = result.getInt("serviceId");

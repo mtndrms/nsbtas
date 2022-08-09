@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.motion.widget.MotionScene;
 import androidx.constraintlayout.motion.widget.TransitionBuilder;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper;
@@ -23,6 +24,7 @@ public class ExpandableStackView extends MotionLayout {
     private Context context;
     private AttributeSet attrs = null;
     private int defStyleAttr = 0;
+    private BaseAdapter adapter;
 
     public ExpandableStackView(@NonNull Context context) {
         super(context);
@@ -37,6 +39,7 @@ public class ExpandableStackView extends MotionLayout {
     }
 
     public void setAdapter(BaseAdapter adapter) {
+        this.adapter = adapter;
         MotionScene scene = new MotionScene(this);
 
         // Constrains before transition
@@ -79,8 +82,7 @@ public class ExpandableStackView extends MotionLayout {
                         view.getId(),
                         ConstraintSet.TOP,
                         ConstraintSet.PARENT_ID,
-                        ConstraintSet.TOP,
-                        fromDpToPx(getResources(), 16)
+                        ConstraintSet.TOP
                 );
                 middleSet.connect(
                         view.getId(),
@@ -157,6 +159,10 @@ public class ExpandableStackView extends MotionLayout {
 
         setScene(scene);
         setTransition(transitionFirstPartId);
+    }
+
+    public BaseAdapter getAdapter() {
+        return adapter;
     }
 
     private void boundTwoViewEnd(ConstraintSet constraintSet, View view) {
