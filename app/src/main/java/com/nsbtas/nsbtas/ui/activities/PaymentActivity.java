@@ -30,7 +30,7 @@ public class PaymentActivity extends AppCompatActivity {
         setStages();
 
         TextView tvCancel = findViewById(R.id.tvCancel);
-        TextView tvIndicator = findViewById(R.id.tvIndicator);
+        // TextView tvIndicator = findViewById(R.id.tvIndicator);
         AppCompatButton btnContinue = findViewById(R.id.btnContinue);
         AppCompatButton btnBack = findViewById(R.id.btnBack);
 
@@ -44,12 +44,12 @@ public class PaymentActivity extends AppCompatActivity {
             if (MultiStepPaymentFormHelper.getCurrentPage() == 5) {
                 btnContinue.setText(getString(R.string.proceed_payment));
             }
-            tvIndicator.setText(getCurrentStageTitle());
+            //tvIndicator.setText(getCurrentStageTitle());
         });
 
         btnBack.setOnClickListener(view -> {
             previousStage(getSupportFragmentManager());
-            tvIndicator.setText(getCurrentStageTitle());
+            //tvIndicator.setText(getCurrentStageTitle());
             btnContinue.setText(getString(R.string.next_stage));
         });
     }

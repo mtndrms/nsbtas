@@ -66,9 +66,7 @@ public class SelectPaymentMethodFragment extends Fragment {
 
         expandableStackView.setAdapter(new ExpandableStackViewAdapter(data, requireContext(), this, expandableStackView));
 
-        expandableStackView.transitionToEnd(() -> {
-            expandableStackView.setTransition(MultiStepPaymentFormHelper.getTransitionId());
-        });
+        expandableStackView.transitionToEnd();
 
         btnAddNewCard.setOnClickListener(view1 -> {
             Intent intent = new Intent(requireActivity(), AddNewCardActivity.class);

@@ -11,7 +11,7 @@
         android:id="@+id/labelChooseCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
+        android:layout_margin="10dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Kart seçin"
         android:textAlignment="center"
@@ -33,15 +33,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0px"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvAddNewCard">
 
         <com.nsbtas.nsbtas.ui.views.ExpandableStackView
             android:id="@+id/expandable_stack"
             android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp" />
+            android:layout_height="0dp" />
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

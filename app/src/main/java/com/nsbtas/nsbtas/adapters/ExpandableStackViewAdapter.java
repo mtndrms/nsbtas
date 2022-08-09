@@ -4,6 +4,7 @@ import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.nextStage;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setCardId;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,10 +96,15 @@ public class ExpandableStackViewAdapter extends BaseAdapter {
         }
 
         cardContainer.setOnClickListener(card -> {
-            expandableStackView.transitionToEnd(() -> {
-                setCardId(models.get(position).getId());
-                nextStage(fragment.getParentFragmentManager());
-            });
+            if (expandableStackView.getCurrentState() == expandableStackView.getEndState()) {
+                expandableStackView.transitionToStart();
+                new Handler().postDelayed(() -> {
+                    setCardId(models.get(position).getId());
+                    nextStage(fragment.getParentFragmentManager());
+                }, 600);
+            } else {
+                expandableStackView.transitionToStart();
+            }
         });
 
         return view;

@@ -16,6 +16,7 @@ public class ExpandableCardListDataPump {
         cards.add(new Card(2, "Visa", "2424 2424 2424 2424", "Test User", "02/02", "456"));
         cards.add(new Card(3, "Mastercard", "5555 5555 5555 5555", "User Test", "03/03", "789"));
         cards.add(new Card(4, "Visa", "1234 5678 9012 3456", "User User", "04/04", "123"));
+        cards.add(new Card(5, "Visa", "1234 5678 9012 3456", "User User", "05/05", "123"));
 
         expandableListDetail.put("Kredi Kartları", cards);
         return expandableListDetail;
@@ -28,6 +29,7 @@ public class ExpandableCardListDataPump {
         cards.add(new Card(2, "Visa", "2424 2424 2424 2424", "Test User", "02/02", "456"));
         cards.add(new Card(3, "Mastercard", "5555 5555 5555 5555", "User Test", "03/03", "789"));
         cards.add(new Card(4, "Visa", "1234 5678 9012 3456", "User User", "04/04", "123"));
+        cards.add(new Card(5, "Visa", "1234 5678 9012 3456", "User User", "05/05", "123"));
 
         return cards;
     }
