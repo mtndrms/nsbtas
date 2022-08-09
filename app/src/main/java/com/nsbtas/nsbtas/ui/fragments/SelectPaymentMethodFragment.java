@@ -2,6 +2,7 @@ package com.nsbtas.nsbtas.ui.fragments;
 
 import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getDataList;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCardId;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getTransitionId;
 
 import android.content.Intent;
 import android.os.Build;
@@ -62,16 +63,10 @@ public class SelectPaymentMethodFragment extends Fragment {
         List<Card> data = getDataList();
 
         ExpandableStackView expandableStackView = view.findViewById(R.id.expandable_stack);
-        TextView btnAddNewCard = view.findViewById(R.id.tvAddNewCard);
 
         expandableStackView.setAdapter(new ExpandableStackViewAdapter(data, requireContext(), this, expandableStackView));
 
-        expandableStackView.transitionToEnd();
-
-        btnAddNewCard.setOnClickListener(view1 -> {
-            Intent intent = new Intent(requireActivity(), AddNewCardActivity.class);
-            startActivity(intent);
-        });
+        expandableStackView.transitionToEnd(() -> expandableStackView.setTransition(getTransitionId()));
 
         getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, result) -> {
             serviceId = result.getInt("serviceId");

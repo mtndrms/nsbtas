@@ -39,9 +39,16 @@ public class PaymentActivity extends AppCompatActivity {
         });
 
         btnContinue.setOnClickListener(view -> {
+            if (getCurrentPage() >= 6) {
+                finish();
+            }
             nextStage(getSupportFragmentManager());
-            if (MultiStepPaymentFormHelper.getCurrentPage() == 5) {
+            if (getCurrentPage() == 5) {
                 btnContinue.setText(getString(R.string.proceed_payment));
+            } else if (getCurrentPage() == 6) {
+                btnContinue.setText("Kapat");
+            } else {
+                btnContinue.setText(getString(R.string.next_stage));
             }
         });
 

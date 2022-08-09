@@ -44,8 +44,8 @@ public class MultiStepPaymentFormHelper {
     }
 
     public static void nextStage(FragmentManager fragmentManager) {
-        if (currentPage.get() < 6) {
-            currentPage.getAndIncrement();
+        currentPage.getAndIncrement();
+        if (currentPage.get() < 7) {
             changeFragment(Objects.requireNonNull(stages.get(currentPage.get())).getTag(), Objects.requireNonNull(stages.get(currentPage.get())), fragmentManager);
         }
     }
