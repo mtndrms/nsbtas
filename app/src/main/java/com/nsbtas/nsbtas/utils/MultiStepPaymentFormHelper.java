@@ -10,6 +10,7 @@ import com.nsbtas.nsbtas.ui.fragments.ConfirmAndProceedPaymentFragment;
 import com.nsbtas.nsbtas.ui.fragments.CustomerInformationFragment;
 import com.nsbtas.nsbtas.ui.fragments.PlaceAmountFragment;
 import com.nsbtas.nsbtas.ui.fragments.SelectPaymentMethodFragment;
+import com.nsbtas.nsbtas.ui.fragments.TransactionResultFragment;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -28,12 +29,14 @@ public class MultiStepPaymentFormHelper {
         stages.put(3, new SelectPaymentMethodFragment());
         stages.put(4, new PlaceAmountFragment());
         stages.put(5, new ConfirmAndProceedPaymentFragment());
+        stages.put(6, new TransactionResultFragment());
 
         titles.put(1, "Servis seçin");
         titles.put(2, "Bilgilerinizi girin");
         titles.put(3, "Kart seçin");
         titles.put(4, "Ödenecek tutarı girin");
         titles.put(5, "Girdiğiniz bilgileri kontrol edin\nve ödemeyi tamamlayın");
+        titles.put(6, "Sonuc");
     }
 
     public static String getCurrentStageTitle() {
@@ -41,15 +44,15 @@ public class MultiStepPaymentFormHelper {
     }
 
     public static void nextStage(FragmentManager fragmentManager) {
-        if (currentPage.get() < 5) {
+        if (currentPage.get() < 6) {
             currentPage.getAndIncrement();
             changeFragment(Objects.requireNonNull(stages.get(currentPage.get())).getTag(), Objects.requireNonNull(stages.get(currentPage.get())), fragmentManager);
         }
     }
 
     public static void previousStage(FragmentManager fragmentManager) {
-        if (currentPage.get() > 1) {
-            currentPage.getAndDecrement();
+        currentPage.getAndDecrement();
+        if (currentPage.get() > 0) {
             changeFragment(Objects.requireNonNull(stages.get(currentPage.get())).getTag(), Objects.requireNonNull(stages.get(currentPage.get())), fragmentManager);
         }
     }

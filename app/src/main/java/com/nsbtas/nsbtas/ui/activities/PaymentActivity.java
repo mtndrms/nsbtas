@@ -1,8 +1,9 @@
 package com.nsbtas.nsbtas.ui.activities;
 
-import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCurrentStageTitle;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCurrentPage;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.nextStage;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.previousStage;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.reset;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setStages;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,13 +31,11 @@ public class PaymentActivity extends AppCompatActivity {
         setStages();
 
         TextView tvCancel = findViewById(R.id.tvCancel);
-        // TextView tvIndicator = findViewById(R.id.tvIndicator);
         AppCompatButton btnContinue = findViewById(R.id.btnContinue);
         AppCompatButton btnBack = findViewById(R.id.btnBack);
 
         tvCancel.setOnClickListener(view -> {
             finish();
-            MultiStepPaymentFormHelper.reset();
         });
 
         btnContinue.setOnClickListener(view -> {
@@ -44,13 +43,14 @@ public class PaymentActivity extends AppCompatActivity {
             if (MultiStepPaymentFormHelper.getCurrentPage() == 5) {
                 btnContinue.setText(getString(R.string.proceed_payment));
             }
-            //tvIndicator.setText(getCurrentStageTitle());
         });
 
         btnBack.setOnClickListener(view -> {
             previousStage(getSupportFragmentManager());
-            //tvIndicator.setText(getCurrentStageTitle());
             btnContinue.setText(getString(R.string.next_stage));
+            if (getCurrentPage() <= 0) {
+                finish();
+            }
         });
     }
 
@@ -62,5 +62,12 @@ public class PaymentActivity extends AppCompatActivity {
                 return fragment;
         }
         return null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        reset();
     }
 }

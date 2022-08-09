@@ -62,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeFragment(Fragment fragment, String Tag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+        );
         fragmentTransaction.replace(R.id.fragmentContainer, fragment, Tag);
         fragmentTransaction.addToBackStack(Tag);
         fragmentTransaction.commit();

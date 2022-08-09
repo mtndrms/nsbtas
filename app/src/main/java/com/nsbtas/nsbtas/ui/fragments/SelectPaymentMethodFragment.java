@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,6 @@ public class SelectPaymentMethodFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_select_payment_method, container, false);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

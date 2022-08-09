@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,5 +67,10 @@ public class ConfirmAndProceedPaymentFragment extends Fragment {
             tvCardExpDate.setText(getDataList().get(result.getInt("cardId") - 1).getExpirationDate());
             tvCardCVV.setText(getDataList().get(result.getInt("cardId") - 1).getCVV());
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class ChooseServiceFragment extends Fragment {
         if (isTransitionAlreadyHappened.get()) {
             isTransitionAlreadyHappened.set(false);
             transitionDrawable.reverseTransition(100);
+            super.onDestroyView();
         } else {
             isTransitionAlreadyHappened.set(true);
             transitionDrawable.startTransition(100);
