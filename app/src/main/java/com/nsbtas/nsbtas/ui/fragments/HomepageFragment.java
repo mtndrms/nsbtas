@@ -2,7 +2,9 @@ package com.nsbtas.nsbtas.ui.fragments;
 
 import static com.nsbtas.nsbtas.utils.LatestExpensesDataPump.getData;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.adapters.ExpenseRecyclerViewAdapter;
@@ -50,6 +53,12 @@ public class HomepageFragment extends Fragment {
         LinearLayout btnHelp = view.findViewById(R.id.btnHelp);
         LinearLayout btnMore = view.findViewById(R.id.btnMore);
         ImageView btnProfilePicture = view.findViewById(R.id.ivCustomerProfilePicture);
+        TextView tvCustomerUsername = view.findViewById(R.id.tvCustomerUsername);
+
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("NSBTAS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        tvCustomerUsername.setText(sharedPreferences.getString("username", "null"));
 
         btnMakePayment.setOnClickListener(view1 -> {
             Intent intent = new Intent(getContext(), PaymentActivity.class);

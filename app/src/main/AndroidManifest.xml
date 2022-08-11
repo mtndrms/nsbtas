@@ -4,6 +4,7 @@
     package="com.nsbtas.nsbtas">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -23,10 +24,10 @@
             android:name=".ui.activities.AddNewCardActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.LoginActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="true"
             android:label="NSBTAS">
             <intent-filter>
