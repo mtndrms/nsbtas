@@ -1,7 +1,6 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
 import static com.nsbtas.nsbtas.network.Client.getClient;
-import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getDataList;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCardId;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getTransitionId;
 
@@ -59,10 +58,7 @@ public class SelectPaymentMethodFragment extends Fragment {
         new Thread(() -> {
             List<CDAEntry> cardCdaEntries = getClient().fetch(CDAEntry.class).one(userEntryId).getField("cards");
             for (CDAEntry card : cardCdaEntries) {
-                double data = card.getField("id");
-                int id = (int) data;
                 cards.add(new Card(
-                        id,
                         card.getField("provider"),
                         card.getField("cardNumber"),
                         card.getField("cardOwner"),

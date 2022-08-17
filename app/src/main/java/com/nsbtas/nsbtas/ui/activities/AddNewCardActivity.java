@@ -1,7 +1,7 @@
 package com.nsbtas.nsbtas.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
@@ -16,13 +16,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.contentful.java.cma.CMACallback;
+import com.contentful.java.cma.model.CMAEntry;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nsbtas.nsbtas.R;
+import com.nsbtas.nsbtas.network.CMAClient;
+import com.nsbtas.nsbtas.utils.Callback;
 import com.nsbtas.nsbtas.utils.Utils;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class AddNewCardActivity extends AppCompatActivity {
     boolean isFront = true;
@@ -31,6 +36,7 @@ public class AddNewCardActivity extends AppCompatActivity {
     AnimatorSet back_animation;
     LinearLayout cardFront;
     LinearLayout cardBack;
+    Callback callback;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -40,6 +46,8 @@ public class AddNewCardActivity extends AppCompatActivity {
 
         Utils.setTheme(this);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("NSBTAS", Context.MODE_PRIVATE);
+        AppCompatButton btnAdd = findViewById(R.id.btnAddCard);
         ImageView btnBack = findViewById(R.id.btnBack);
         TextInputLayout etCardNumber = findViewById(R.id.etCardNumber);
         TextInputLayout etCardOwnerInfo = findViewById(R.id.etCardOwnerInfo);
@@ -58,7 +66,50 @@ public class AddNewCardActivity extends AppCompatActivity {
 
         List<TextInputLayout> requiredFields = Arrays.asList(etCardNumber, etCardOwnerInfo, etExpirationDate, etCVV);
 
+        this.callback = this::finish;
+
         btnBack.setOnClickListener(view -> finish());
+
+        btnAdd.setOnClickListener(view -> {
+            final CMAEntry newCard =
+                    new CMAEntry()
+                            .setId(String.valueOf(UUID.randomUUID()))
+                            .setField("cardNumber", "en-US", Objects.requireNonNull(etCardNumber.getEditText()).getText().toString())
+                            .setField("cardOwner", "en-US", Objects.requireNonNull(etCardOwnerInfo.getEditText()).getText().toString())
+                            .setField("expirationDate", "en-US", Objects.requireNonNull(etExpirationDate.getEditText()).getText().toString())
+                            .setField("cvv", "en-US", Objects.requireNonNull(etCVV.getEditText()).getText().toString())
+                            .setField("provider", "en-US", etCardNumber.getEditText().getText().toString().startsWith("4") ? "Visa" : "Mastercard");
+
+            CMAClient.getClient().entries().async().create("card", newCard, new CMACallback<CMAEntry>() {
+                @Override
+                protected void onSuccess(CMAEntry resultCard) {
+                    CMAClient.getClient().entries().async().fetchOne(sharedPreferences.getString("userEntryId", "empty"), new CMACallback<CMAEntry>() {
+                        @Override
+                        protected void onSuccess(CMAEntry result) {
+                            List<CMAEntry> cmaCards = result.getField("cards", "en-US");
+                            cmaCards.add(resultCard);
+                            result.setField("cards", "en-US", cmaCards);
+                            CMAClient.getClient().entries().async().update(result, new CMACallback<CMAEntry>() {
+                                @Override
+                                protected void onSuccess(CMAEntry result) {
+                                }
+
+                                @Override
+                                protected void onFailure(RuntimeException exception) {
+                                    super.onFailure(exception);
+                                }
+                            });
+                        }
+                    });
+                }
+
+                @Override
+                protected void onFailure(RuntimeException exception) {
+                    super.onFailure(exception);
+                }
+            });
+            this.callback.callback();
+        });
 
         // Format card number (eg. 4242 4242 4242 4242)
         Objects.requireNonNull(etCardNumber.getEditText()).addTextChangedListener(new TextWatcher() {

@@ -2,6 +2,7 @@ package com.nsbtas.nsbtas.adapters;
 
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.nextStage;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setCardId;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setChosenCard;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setTransitionId;
 
 import android.content.Context;
@@ -79,7 +80,7 @@ public class ExpandableStackViewAdapter extends BaseAdapter {
 
         cardContainer.setOnClickListener(card -> {
             expandableStackView.transitionToEnd(() -> {
-                setCardId(models.get(position).getId());
+                setChosenCard(models.get(position));
                 nextStage(fragment.getParentFragmentManager());
             });
         });

@@ -13,10 +13,19 @@
         android:clickable="true"
         android:contentDescription="@string/app_name"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnAddNewCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/secondary_text_color" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddNewCard"
+        style="@style/ButtonStyle"
+        android:text="@string/add_new_card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/changeTheme" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

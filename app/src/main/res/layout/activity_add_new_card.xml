@@ -228,6 +228,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddCard"
         style="@style/ButtonStyle"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"

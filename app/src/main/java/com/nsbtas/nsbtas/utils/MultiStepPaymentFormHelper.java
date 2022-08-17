@@ -5,6 +5,7 @@ import static com.nsbtas.nsbtas.utils.Utils.changeFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.nsbtas.nsbtas.models.Card;
 import com.nsbtas.nsbtas.ui.fragments.ChooseServiceFragment;
 import com.nsbtas.nsbtas.ui.fragments.ConfirmAndProceedPaymentFragment;
 import com.nsbtas.nsbtas.ui.fragments.CustomerInformationFragment;
@@ -22,6 +23,7 @@ public class MultiStepPaymentFormHelper {
     private static final AtomicInteger currentPage = new AtomicInteger(1);
     public static int cardId;
     private static int transitionId;
+    private static Card chosenCard;
 
     public static void setStages() {
         stages.put(1, new ChooseServiceFragment());
@@ -83,5 +85,13 @@ public class MultiStepPaymentFormHelper {
 
     public static void reset() {
         currentPage.set(1);
+    }
+
+    public static void setChosenCard(Card card) {
+        chosenCard = card;
+    }
+
+    public static Card getChosenCard() {
+        return chosenCard;
     }
 }

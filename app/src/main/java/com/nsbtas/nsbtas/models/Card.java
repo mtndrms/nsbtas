@@ -1,7 +1,6 @@
 package com.nsbtas.nsbtas.models;
 
 public class Card {
-    private int id; // comes from db
     private String provider;
     private String cardNumber;
     private String cardOwner;
@@ -11,21 +10,12 @@ public class Card {
     public Card() {
     }
 
-    public Card(int id, String provider, String cardNumber, String cardOwner, String expirationDate, String CVV) {
-        this.id = id;
+    public Card(String provider, String cardNumber, String cardOwner, String expirationDate, String CVV) {
         this.provider = provider;
         this.cardNumber = cardNumber;
         this.cardOwner = cardOwner;
         this.expirationDate = expirationDate;
         this.CVV = CVV;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getProvider() {

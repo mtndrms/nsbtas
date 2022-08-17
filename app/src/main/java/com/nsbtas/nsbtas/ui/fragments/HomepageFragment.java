@@ -48,15 +48,13 @@ public class HomepageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("NSBTAS", Context.MODE_PRIVATE);
         LinearLayout btnMakePayment = view.findViewById(R.id.btnMakePayment);
         LinearLayout btnServices = view.findViewById(R.id.btnServices);
         LinearLayout btnHelp = view.findViewById(R.id.btnHelp);
         LinearLayout btnMore = view.findViewById(R.id.btnMore);
         ImageView btnProfilePicture = view.findViewById(R.id.ivCustomerProfilePicture);
         TextView tvCustomerUsername = view.findViewById(R.id.tvCustomerUsername);
-
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("NSBTAS", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         tvCustomerUsername.setText(sharedPreferences.getString("username", "null"));
 

@@ -1,6 +1,7 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
 import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getDataList;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getChosenCard;
 import static com.nsbtas.nsbtas.utils.Utils.getServiceById;
 
 import android.os.Bundle;
@@ -62,10 +63,10 @@ public class ConfirmAndProceedPaymentFragment extends Fragment {
             tvEmailAddress.setText(result.getString("emailAddress"));
             tvNote.setText(result.getString("note"));
             tvAmount.setText(result.getString("amount"));
-            tvCardOwner.setText(getDataList().get(result.getInt("cardId") - 1).getCardOwner());
-            tvCardNumber.setText(getDataList().get(result.getInt("cardId") - 1).getCardNumber());
-            tvCardExpDate.setText(getDataList().get(result.getInt("cardId") - 1).getExpirationDate());
-            tvCardCVV.setText(getDataList().get(result.getInt("cardId") - 1).getCVV());
+            tvCardOwner.setText(getChosenCard().getCardOwner());
+            tvCardNumber.setText(getChosenCard().getCardNumber());
+            tvCardExpDate.setText(getChosenCard().getExpirationDate());
+            tvCardCVV.setText(getChosenCard().getCVV());
         });
     }
 

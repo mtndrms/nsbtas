@@ -1,6 +1,7 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.nsbtas.nsbtas.R;
+import com.nsbtas.nsbtas.ui.activities.AddNewCardActivity;
 
 public class ProfileFragment extends Fragment {
     public ProfileFragment() {
@@ -45,6 +48,7 @@ public class ProfileFragment extends Fragment {
 
         boolean isLightThemeActive = sharedPreferences.getBoolean("isLightThemeActive", true);
         ImageView btnChangeTheme = view.findViewById(R.id.changeTheme);
+        AppCompatButton btnAddNewCard = view.findViewById(R.id.btnAddNewCard);
 
         if (isLightThemeActive) {
             btnChangeTheme.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_dark_mode));
@@ -64,6 +68,11 @@ public class ProfileFragment extends Fragment {
                 editor.putBoolean("isLightThemeActive", true);
             }
             editor.apply();
+        });
+
+        btnAddNewCard.setOnClickListener(btnAdd -> {
+            Intent intent = new Intent(requireContext(), AddNewCardActivity.class);
+            startActivity(intent);
         });
     }
 }
