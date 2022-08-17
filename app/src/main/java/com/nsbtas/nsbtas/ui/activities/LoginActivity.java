@@ -14,8 +14,10 @@ import com.contentful.java.cda.CDAArray;
 import com.contentful.java.cda.CDAEntry;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nsbtas.nsbtas.R;
+import com.nsbtas.nsbtas.models.Card;
 import com.nsbtas.nsbtas.utils.Utils;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {

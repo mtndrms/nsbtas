@@ -1,6 +1,7 @@
 package com.nsbtas.nsbtas.network;
 
 import com.contentful.java.cda.CDAClient;
+import com.nsbtas.nsbtas.utils.Constants;
 
 public class Client {
     public static CDAClient client = null;
@@ -8,8 +9,8 @@ public class Client {
     public static CDAClient getClient() {
         if (client == null) {
             client = CDAClient.builder()
-                    .setSpace("2u27d4lk17xx")
-                    .setToken("keo8d4fz1uumyI_d7q7143xIqGXl4xpQmJQMgoKK0e4")
+                    .setSpace(Constants.spaceID)
+                    .setToken(Constants.apiToken)
                     .build();
         }
         return client;
