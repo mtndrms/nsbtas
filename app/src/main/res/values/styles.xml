@@ -12,6 +12,8 @@
         <item name="helperTextTextColor">@color/primary_text_color</item>
         <item name="counterTextColor">@color/primary_text_color</item>
         <item name="errorEnabled">true</item>
+        <item name="boxStrokeErrorColor">@color/errorColor</item>
+        <item name="errorIconTint">@color/errorColor</item>
         <item name="startIconTint">@color/secondary_text_color</item>
         <item name="endIconTint">@color/primary_text_color</item>
         <item name="android:layout_marginStart">25dp</item>

@@ -1,5 +1,8 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCurrentPage;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setRequiredFields;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -66,6 +69,8 @@ public class CustomerInformationFragment extends Fragment {
         etNote = view.findViewById(R.id.etNote); // required
         etPhysicalAddress = view.findViewById(R.id.etPhysicalAddress); // required
         List<TextInputLayout> requiredFields = Arrays.asList(etCustomerName, etPhoneNumber, etNote, etPhysicalAddress);
+
+        setRequiredFields(getCurrentPage(), requiredFields);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setIsAmountPlaced;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -78,14 +80,23 @@ public class PlaceAmountFragment extends Fragment {
         });
 
         for (TextView button : numPad) {
-            button.setOnClickListener(btn -> amount.setText(amount.getText().toString().concat(button.getText().toString())));
+            button.setOnClickListener(btn -> {
+                amount.setText(amount.getText().toString().concat(button.getText().toString()));
+                setIsAmountPlaced(true);
+            });
         }
 
-        btnAllClear.setOnClickListener(btnAC -> amount.setText(null));
+        btnAllClear.setOnClickListener(btnAC -> {
+            amount.setText(null);
+            setIsAmountPlaced(false);
+        });
 
         btnDelete.setOnClickListener(del -> {
             if (amount.getText().toString().length() > 0) {
                 amount.setText(amount.getText().toString().substring(0, amount.getText().toString().length() - 1));
+            }
+            if (amount.getText().toString().length() == 0) {
+                setIsAmountPlaced(false);
             }
         });
     }
@@ -106,5 +117,9 @@ public class PlaceAmountFragment extends Fragment {
         result.putInt("cardId", cardId);
         result.putString("amount", amount.getText().toString());
         getParentFragmentManager().setFragmentResult("requestKey", result);
+    }
+
+    public TextView getAmount() {
+        return amount;
     }
 }

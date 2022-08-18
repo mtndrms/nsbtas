@@ -42,36 +42,44 @@ public class LoginActivity extends AppCompatActivity {
         TextInputLayout etUsername = findViewById(R.id.etUsername);
         TextInputLayout etPassword = findViewById(R.id.etPassword);
 
-        Thread thread = new Thread(() -> {
-            try {
-                usernameGiven = Objects.requireNonNull(etUsername.getEditText()).getText().toString();
-                passwordGiven = Objects.requireNonNull(etPassword.getEditText()).getText().toString();
-                found = getClient().fetch(CDAEntry.class)
-                        .where("content_type", "user")
-                        .where("fields.username", usernameGiven)
-                        .where("fields.password", passwordGiven)
-                        .all();
-
-                if (!found.entries().keySet().isEmpty()) {
-                    editor.putString("userEntryId", found.entries().keySet().toArray()[0].toString());
-                    editor.putString("username", Objects.requireNonNull(found.entries().get(found.entries().keySet().toArray()[0].toString())).getField("username").toString());
-                    editor.apply();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    runOnUiThread(() -> {
-                        etUsername.setError("Yanlış kullanıcı adı ya da şifre");
-                        etPassword.setError("Yanlış kullanıcı adı ya da şifre");
-                    });
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
         btnLogIn.setOnClickListener(view -> {
-            thread.start();
+            new Thread(() -> {
+                try {
+                    usernameGiven = Objects.requireNonNull(etUsername.getEditText()).getText().toString();
+                    passwordGiven = Objects.requireNonNull(etPassword.getEditText()).getText().toString();
+                    found = getClient().fetch(CDAEntry.class)
+                            .where("content_type", "user")
+                            .where("fields.username", usernameGiven)
+                            .where("fields.password", passwordGiven)
+                            .all();
+
+                    if (usernameGiven.isEmpty() || passwordGiven.isEmpty()) {
+                        runOnUiThread(() -> {
+                            if (usernameGiven.isEmpty()) {
+                                etUsername.setError("Bu alan boş bırakılamaz");
+                            }
+                            if (passwordGiven.isEmpty()) {
+                                etPassword.setError("Bu alan boş bırakılamaz");
+                            }
+                        });
+                    } else {
+                        if (!found.entries().keySet().isEmpty()) {
+                            editor.putString("userEntryId", found.entries().keySet().toArray()[0].toString());
+                            editor.putString("username", Objects.requireNonNull(found.entries().get(found.entries().keySet().toArray()[0].toString())).getField("username").toString());
+                            editor.apply();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            runOnUiThread(() -> {
+                                etUsername.setError("Yanlış kullanıcı adı ya da şifre");
+                                etPassword.setError("Yanlış kullanıcı adı ya da şifre");
+                            });
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
         });
     }
 }

@@ -1,5 +1,7 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setIsServiceChosen;
+
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 
@@ -58,18 +60,21 @@ public class ChooseServiceFragment extends Fragment {
             makeTransitionOnSelect(transition1);
             result.putInt("serviceId", 1);
             getParentFragmentManager().setFragmentResult("requestKey", result);
+            setIsServiceChosen(true);
         });
 
         service2.setOnClickListener(view12 -> {
             makeTransitionOnSelect(transition2);
             result.putInt("serviceId", 2);
             getParentFragmentManager().setFragmentResult("requestKey", result);
+            setIsServiceChosen(true);
         });
 
         service3.setOnClickListener(view13 -> {
             makeTransitionOnSelect(transition3);
             result.putInt("serviceId", 3);
             getParentFragmentManager().setFragmentResult("requestKey", result);
+            setIsServiceChosen(true);
         });
     }
 
