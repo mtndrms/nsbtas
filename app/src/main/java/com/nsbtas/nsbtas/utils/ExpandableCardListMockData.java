@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExpandableCardListDataPump {
+public class ExpandableCardListMockData {
     public static HashMap<String, List<Card>> getData() {
         HashMap<String, List<Card>> expandableListDetail = new HashMap<>();
 

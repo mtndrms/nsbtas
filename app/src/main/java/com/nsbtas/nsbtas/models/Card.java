@@ -7,9 +7,6 @@ public class Card {
     private String expirationDate;
     private String CVV;
 
-    public Card() {
-    }
-
     public Card(String provider, String cardNumber, String cardOwner, String expirationDate, String CVV) {
         this.provider = provider;
         this.cardNumber = cardNumber;

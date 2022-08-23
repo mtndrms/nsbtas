@@ -1,6 +1,6 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
-import static com.nsbtas.nsbtas.utils.LatestExpensesDataPump.getData;
+import static com.nsbtas.nsbtas.network.Client.getClient;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,11 +22,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.contentful.java.cda.CDAArray;
+import com.contentful.java.cda.CDAEntry;
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.adapters.ExpenseRecyclerViewAdapter;
+import com.nsbtas.nsbtas.models.Expense;
 import com.nsbtas.nsbtas.ui.activities.PaymentActivity;
+import com.nsbtas.nsbtas.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomepageFragment extends Fragment {
+    CDAArray usersExpenses = null;
+
     public HomepageFragment() {
     }
 
@@ -49,12 +58,43 @@ public class HomepageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("NSBTAS", Context.MODE_PRIVATE);
+
         LinearLayout btnMakePayment = view.findViewById(R.id.btnMakePayment);
         LinearLayout btnServices = view.findViewById(R.id.btnServices);
         LinearLayout btnHelp = view.findViewById(R.id.btnHelp);
         LinearLayout btnMore = view.findViewById(R.id.btnMore);
         ImageView btnProfilePicture = view.findViewById(R.id.ivCustomerProfilePicture);
         TextView tvCustomerUsername = view.findViewById(R.id.tvCustomerUsername);
+
+        List<Expense> expenses = new ArrayList<>();
+
+        new Thread(() -> {
+            try {
+                usersExpenses = getClient().fetch(CDAEntry.class)
+                        .where("content_type", "expense")
+                        .where("fields.user", sharedPreferences.getString("userEntryId", "null"))
+                        .all();
+
+                for (CDAEntry entry : usersExpenses.entries().values()) {
+                    expenses.add(
+                            new Expense(
+                                    Utils.getServiceById(Integer.parseInt(entry.getField("service"))),
+                                    entry.getField("date"),
+                                    entry.getField("amount").toString()
+                            )
+                    );
+                }
+
+                requireActivity().runOnUiThread(() -> {
+                    RecyclerView rvLatestExpenses = view.findViewById(R.id.rvLatestExpenses);
+                    rvLatestExpenses.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rvLatestExpenses.setAdapter(new ExpenseRecyclerViewAdapter(expenses));
+                });
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }).start();
 
         tvCustomerUsername.setText(sharedPreferences.getString("username", "null"));
 
@@ -76,8 +116,5 @@ public class HomepageFragment extends Fragment {
             fragmentTransaction.commit();
         });
 
-        RecyclerView rvLatestExpenses = view.findViewById(R.id.rvLatestExpenses);
-        rvLatestExpenses.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvLatestExpenses.setAdapter(new ExpenseRecyclerViewAdapter(getData()));
     }
 }

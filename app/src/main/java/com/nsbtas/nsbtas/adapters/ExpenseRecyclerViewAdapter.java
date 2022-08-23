@@ -12,9 +12,10 @@ import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.models.Expense;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExpenseRecyclerViewAdapter extends RecyclerView.Adapter<ExpenseRecyclerViewAdapter.ViewHolder> {
-    private final ArrayList<Expense> localDataSet;
+    private final List<Expense> localDataSet;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvFirm;
@@ -42,7 +43,7 @@ public class ExpenseRecyclerViewAdapter extends RecyclerView.Adapter<ExpenseRecy
         }
     }
 
-    public ExpenseRecyclerViewAdapter(ArrayList<Expense> dataSet) {
+    public ExpenseRecyclerViewAdapter(List<Expense> dataSet) {
         localDataSet = dataSet;
     }
 
@@ -56,7 +57,7 @@ public class ExpenseRecyclerViewAdapter extends RecyclerView.Adapter<ExpenseRecy
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        viewHolder.getTvFirm().setText(localDataSet.get(position).getFirm());
+        viewHolder.getTvFirm().setText(localDataSet.get(position).getService());
         viewHolder.getTvDate().setText(localDataSet.get(position).getDate());
         viewHolder.getTvAmount().setText(String.format("₺%s", localDataSet.get(position).getAmount()));
     }

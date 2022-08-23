@@ -1,6 +1,5 @@
 package com.nsbtas.nsbtas.ui.fragments;
 
-import static com.nsbtas.nsbtas.utils.ExpandableCardListDataPump.getDataList;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getChosenCard;
 import static com.nsbtas.nsbtas.utils.Utils.getServiceById;
 
@@ -10,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

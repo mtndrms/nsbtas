@@ -1,25 +1,22 @@
 package com.nsbtas.nsbtas.models;
 
 public class Expense {
-    private String firm;
+    private String service;
     private String date;
-    private int amount;
+    private String amount;
 
-    public Expense() {
-    }
-
-    public Expense(String firm, String date, int amount) {
-        this.firm = firm;
+    public Expense(String service, String date, String amount) {
+        this.service = service;
         this.date = date;
         this.amount = amount;
     }
 
-    public String getFirm() {
-        return firm;
+    public String getService() {
+        return service;
     }
 
-    public void setFirm(String firm) {
-        this.firm = firm;
+    public void setService(String service) {
+        this.service = service;
     }
 
     public String getDate() {
@@ -30,11 +27,11 @@ public class Expense {
         this.date = date;
     }
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 }
