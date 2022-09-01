@@ -1,7 +1,8 @@
-package com.nsbtas.nsbtas.ui.activities;
+package com.nsbtas.nsbtas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
@@ -24,12 +25,11 @@ import com.nsbtas.nsbtas.network.CMAClient;
 import com.nsbtas.nsbtas.utils.Callback;
 import com.nsbtas.nsbtas.utils.Utils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class AddNewCardActivity extends AppCompatActivity {
+public class SaveNewCardActivity extends AppCompatActivity {
     boolean isFront = true;
     boolean isTransactionAlreadyHappened = false;
     AnimatorSet front_animation;
@@ -42,7 +42,7 @@ public class AddNewCardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_card);
+        setContentView(R.layout.activity_save_new_card);
 
         Utils.setTheme(this);
 
@@ -63,8 +63,6 @@ public class AddNewCardActivity extends AppCompatActivity {
 
         front_animation = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.card_turn_front_animator);
         back_animation = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.card_turn_back_animator);
-
-        List<TextInputLayout> requiredFields = Arrays.asList(etCardNumber, etCardOwnerInfo, etExpirationDate, etCVV);
 
         this.callback = this::finish;
 
@@ -125,21 +123,26 @@ public class AddNewCardActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                TransitionDrawable transition = (TransitionDrawable) cardFront.getBackground();
+                TransitionDrawable transition;
                 if (s.toString().startsWith("4")) {
                     ivLogo.setImageResource(R.drawable.logo_visa);
                     if (!isTransactionAlreadyHappened) {
+                        cardFront.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_card_transition_visa));
+                        transition = (TransitionDrawable) cardFront.getBackground();
                         transition.startTransition(500);
                         isTransactionAlreadyHappened = true;
                     }
                 } else if (s.toString().startsWith("5")) {
                     ivLogo.setImageResource(R.drawable.logo_mastercard);
                     if (!isTransactionAlreadyHappened) {
+                        cardFront.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_card_transition_mastercard));
+                        transition = (TransitionDrawable) cardFront.getBackground();
                         transition.startTransition(500);
                         isTransactionAlreadyHappened = true;
                     }
                 } else {
                     ivLogo.setImageDrawable(null);
+                    transition = (TransitionDrawable) cardFront.getBackground();
                     if (isTransactionAlreadyHappened) {
                         transition.reverseTransition(500);
                         isTransactionAlreadyHappened = false;

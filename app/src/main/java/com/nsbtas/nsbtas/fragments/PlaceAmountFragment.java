@@ -1,4 +1,4 @@
-package com.nsbtas.nsbtas.ui.fragments;
+package com.nsbtas.nsbtas.fragments;
 
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setIsAmountPlaced;
 
@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,13 +107,6 @@ public class PlaceAmountFragment extends Fragment {
         Bundle result = new Bundle();
 
         result.putInt("serviceId", serviceId);
-        result.putString("companyName", firmName);
-        result.putString("customerName", customerName);
-        result.putString("emailAddress", emailAddress);
-        result.putString("address", address);
-        result.putString("note", note);
-        result.putString("phoneNumber", phoneNumber);
-        result.putInt("cardId", cardId);
         result.putString("amount", amount.getText().toString());
         getParentFragmentManager().setFragmentResult("requestKey", result);
     }

@@ -8,7 +8,7 @@
     android:background="@color/background"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".ui.fragments.TransactionResultFragment">
+    tools:context=".fragments.TransactionResultFragment">
 
     <ImageView
         android:id="@+id/ivDone"

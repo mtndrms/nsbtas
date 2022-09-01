@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     app:layoutDescription="@xml/fragment_homepage_scene"
-    tools:context=".ui.fragments.HomepageFragment"
+    tools:context=".fragments.HomepageFragment"
     tools:ignore="UseCompoundDrawables">
 
     <ImageView
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Sık Kullanılanlar"
+        android:text="@string/bookmarks"
         android:textColor="@color/primary_text_color"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/shortcuts"
@@ -71,7 +71,7 @@
         app:layout_constraintBottom_toTopOf="@+id/latestExpensesContainer">
 
         <LinearLayout
-            android:id="@+id/btnMakePayment"
+            android:id="@+id/btnBookmarkFirst"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -99,7 +99,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btnServices"
+            android:id="@+id/btnBookmarkSecond"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -121,13 +121,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Hizmetler"
+                android:text="Abonelikler"
                 android:textAlignment="center"
                 android:textColor="@color/primary_text_color" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btnHelp"
+            android:id="@+id/btnBookmarkThird"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

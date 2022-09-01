@@ -1,4 +1,4 @@
-package com.nsbtas.nsbtas.ui.fragments;
+package com.nsbtas.nsbtas.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.nsbtas.nsbtas.R;
-import com.nsbtas.nsbtas.ui.activities.AddNewCardActivity;
+import com.nsbtas.nsbtas.activities.SaveNewCardActivity;
+import com.nsbtas.nsbtas.activities.SaveNewCompanyActivity;
 
 public class ProfileFragment extends Fragment {
     public ProfileFragment() {
@@ -47,8 +48,9 @@ public class ProfileFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         boolean isLightThemeActive = sharedPreferences.getBoolean("isLightThemeActive", true);
-        ImageView btnChangeTheme = view.findViewById(R.id.changeTheme);
-        AppCompatButton btnAddNewCard = view.findViewById(R.id.btnAddNewCard);
+        ImageView btnChangeTheme = view.findViewById(R.id.btnChangeTheme);
+        AppCompatButton btnSaveNewCard = view.findViewById(R.id.btnSaveNewCard);
+        AppCompatButton btnSaveNewCompany = view.findViewById(R.id.btnSaveNewCompany);
 
         if (isLightThemeActive) {
             btnChangeTheme.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_dark_mode));
@@ -70,8 +72,13 @@ public class ProfileFragment extends Fragment {
             editor.apply();
         });
 
-        btnAddNewCard.setOnClickListener(btnAdd -> {
-            Intent intent = new Intent(requireContext(), AddNewCardActivity.class);
+        btnSaveNewCard.setOnClickListener(btnAdd -> {
+            Intent intent = new Intent(requireContext(), SaveNewCardActivity.class);
+            startActivity(intent);
+        });
+
+        btnSaveNewCompany.setOnClickListener(btnAdd -> {
+            Intent intent = new Intent(requireContext(), SaveNewCompanyActivity.class);
             startActivity(intent);
         });
     }

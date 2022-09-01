@@ -2,19 +2,18 @@ package com.nsbtas.nsbtas.utils;
 
 import static com.nsbtas.nsbtas.utils.Utils.changeFragment;
 
-import android.widget.EditText;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.nsbtas.nsbtas.models.Card;
-import com.nsbtas.nsbtas.ui.fragments.ChooseServiceFragment;
-import com.nsbtas.nsbtas.ui.fragments.ConfirmAndProceedPaymentFragment;
-import com.nsbtas.nsbtas.ui.fragments.CustomerInformationFragment;
-import com.nsbtas.nsbtas.ui.fragments.PlaceAmountFragment;
-import com.nsbtas.nsbtas.ui.fragments.SelectPaymentMethodFragment;
-import com.nsbtas.nsbtas.ui.fragments.TransactionResultFragment;
+import com.nsbtas.nsbtas.fragments.ChooseServiceFragment;
+import com.nsbtas.nsbtas.fragments.ConfirmAndProceedPaymentFragment;
+import com.nsbtas.nsbtas.fragments.ChooseCompanyFragment;
+import com.nsbtas.nsbtas.fragments.PlaceAmountFragment;
+import com.nsbtas.nsbtas.fragments.SelectPaymentMethodFragment;
+import com.nsbtas.nsbtas.fragments.TransactionResultFragment;
+import com.nsbtas.nsbtas.models.Company;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,13 +27,15 @@ public class MultiStepPaymentFormHelper {
     public static int cardId;
     private static int transitionId;
     private static Card chosenCard;
+    private static Company chosenCompany;
 
     private static boolean isServiceChosen = false;
+    public static boolean isCompanyChosen = false;
     private static boolean isAmountPlaced = false;
 
     public static void setStages() {
         stages.put(1, new ChooseServiceFragment());
-        stages.put(2, new CustomerInformationFragment());
+        stages.put(2, new ChooseCompanyFragment());
         stages.put(3, new SelectPaymentMethodFragment());
         stages.put(4, new PlaceAmountFragment());
         stages.put(5, new ConfirmAndProceedPaymentFragment());
@@ -50,14 +51,7 @@ public class MultiStepPaymentFormHelper {
         if (getCurrentPage() == 1) {
             error = !isServiceChosen;
         } else if (getCurrentPage() == 2) {
-            List<TextInputLayout> tmp = requiredFields.get(getCurrentPage());
-            for (TextInputLayout field : tmp) {
-                if (field.getEditText().getText().toString().isEmpty()) {
-                    field.setError("Bu alan boş bırakılamaz");
-                    error = true;
-                }
-            }
-            return error;
+            error = !isCompanyChosen;
         } else if (getCurrentPage() == 3) {
             error = chosenCard == null;
         } else if (getCurrentPage() == 4) {
@@ -67,11 +61,9 @@ public class MultiStepPaymentFormHelper {
     }
 
     public static void nextStage(FragmentManager fragmentManager) {
-        if (!checkRequiredFields()) {
-            currentPage.getAndIncrement();
-            if (currentPage.get() < stages.size() + 1) {
-                changeFragment(Objects.requireNonNull(stages.get(currentPage.get())).getTag(), Objects.requireNonNull(stages.get(currentPage.get())), fragmentManager);
-            }
+        currentPage.getAndIncrement();
+        if (currentPage.get() < stages.size() + 1) {
+            changeFragment(Objects.requireNonNull(stages.get(currentPage.get())).getTag(), Objects.requireNonNull(stages.get(currentPage.get())), fragmentManager);
         }
     }
 
@@ -94,10 +86,6 @@ public class MultiStepPaymentFormHelper {
         return cardId;
     }
 
-    public static void setCardId(int cardId) {
-        MultiStepPaymentFormHelper.cardId = cardId;
-    }
-
     public static int getCurrentPage() {
         return currentPage.get();
     }
@@ -109,7 +97,9 @@ public class MultiStepPaymentFormHelper {
     public static void reset() {
         isServiceChosen = false;
         isAmountPlaced = false;
+        isCompanyChosen = false;
         chosenCard = null;
+        chosenCompany = null;
         currentPage.set(1);
     }
 
@@ -121,8 +111,12 @@ public class MultiStepPaymentFormHelper {
         return chosenCard;
     }
 
-    public static boolean isIsServiceChosen() {
-        return isServiceChosen;
+    public static void setChosenCompany(Company company) {
+        chosenCompany = company;
+    }
+
+    public static Company getChosenCompany() {
+        return chosenCompany;
     }
 
     public static void setIsServiceChosen(boolean isServiceChosen) {
@@ -131,5 +125,9 @@ public class MultiStepPaymentFormHelper {
 
     public static void setIsAmountPlaced(boolean isAmountPlaced) {
         MultiStepPaymentFormHelper.isAmountPlaced = isAmountPlaced;
+    }
+
+    public static void setIsCompanyChosen(boolean isCompanyChosen) {
+        MultiStepPaymentFormHelper.isCompanyChosen = isCompanyChosen;
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".ui.fragments.PlaceAmountFragment">
+    tools:context=".fragments.PlaceAmountFragment">
 
     <TextView
         android:id="@+id/tvAmount"

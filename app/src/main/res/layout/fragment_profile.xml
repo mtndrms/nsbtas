@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.ProfileFragment">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".fragments.ProfileFragment">
 
     <ImageView
-        android:id="@+id/changeTheme"
+        android:id="@+id/btnChangeTheme"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="25dp"
         android:clickable="true"
         android:contentDescription="@string/app_name"
         android:focusable="true"
-        app:layout_constraintBottom_toTopOf="@id/btnAddNewCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/secondary_text_color" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAddNewCard"
+        android:id="@+id/btnSaveNewCard"
         style="@style/ButtonStyle"
-        android:text="@string/add_new_card"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/changeTheme" />
+        android:text="@string/save_new_card" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSaveNewCompany"
+        style="@style/ButtonStyle"
+        android:text="@string/save_new_company" />
+</LinearLayout>

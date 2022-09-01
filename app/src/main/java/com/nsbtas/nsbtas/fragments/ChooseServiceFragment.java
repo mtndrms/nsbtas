@@ -1,4 +1,4 @@
-package com.nsbtas.nsbtas.ui.fragments;
+package com.nsbtas.nsbtas.fragments;
 
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setIsServiceChosen;
 
@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

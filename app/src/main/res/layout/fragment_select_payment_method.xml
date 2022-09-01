@@ -12,9 +12,9 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.fragments.SelectPaymentMethodFragment">
+        tools:context=".fragments.SelectPaymentMethodFragment">
 
-        <com.nsbtas.nsbtas.ui.views.ExpandableStackView
+        <com.nsbtas.nsbtas.views.CardDropdownView
             android:id="@+id/expandable_stack"
             android:layout_width="match_parent"
             android:layout_height="0dp"

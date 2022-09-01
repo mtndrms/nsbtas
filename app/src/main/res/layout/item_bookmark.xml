@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="50dp"
+    android:layout_marginEnd="50dp">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/ivBookmarkIcon"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/primary_text_color"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/ivBookmarkIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:contentDescription="@string/bookmarks"
+        android:focusable="true"
+        android:src="@drawable/icon_favorite"
+        app:tint="@color/primary_text_color" />
+</RelativeLayout>

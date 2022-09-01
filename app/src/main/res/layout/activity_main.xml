@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:gravity="center"
-    tools:context=".ui.activities.MainActivity"
+    tools:context=".activities.MainActivity"
     tools:ignore="UseCompoundDrawables">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
-        android:name="com.nsbtas.nsbtas.ui.fragments.HomepageFragment"
+        android:name="com.nsbtas.nsbtas.fragments.HomepageFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"

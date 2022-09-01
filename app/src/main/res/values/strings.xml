@@ -28,7 +28,7 @@
     <string name="pick_service_type">Ürün/Hizmet Seçin</string>
     <string name="back">Geri</string>
     <string name="cancel">Vazgeç</string>
-    <string name="add_new_card">Yeni kart ekle</string>
+    <string name="save_new_card">Yeni kart kaydet</string>
     <string name="save">Kaydet</string>
     <string name="homepage">Anasayfa</string>
     <string name="hello">Merhaba,</string>
@@ -37,4 +37,6 @@
     <string name="saved_payment_methods">Kayıtlı ödeme yöntemleri</string>
     <string name="choose_service">Servis seçin</string>
     <string name="forgot_my_password">Şifremi unuttum</string>
+    <string name="bookmarks">Sık Kullanılanlar</string>
+    <string name="save_new_company">Yeni firma kaydet</string>
 </resources>

@@ -1,8 +1,7 @@
-package com.nsbtas.nsbtas.ui.activities;
+package com.nsbtas.nsbtas.activities;
 
-import static com.nsbtas.nsbtas.network.Client.getClient;
+import static com.nsbtas.nsbtas.network.CDAClient.getClient;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -13,13 +12,8 @@ import android.os.Bundle;
 
 import com.contentful.java.cda.CDAArray;
 import com.contentful.java.cda.CDAEntry;
-import com.contentful.java.cma.CMACallback;
-import com.contentful.java.cma.model.CMAArray;
-import com.contentful.java.cma.model.CMAEntry;
-import com.contentful.java.cma.model.CMAEnvironment;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nsbtas.nsbtas.R;
-import com.nsbtas.nsbtas.network.CMAClient;
 import com.nsbtas.nsbtas.utils.Utils;
 
 import java.util.Objects;

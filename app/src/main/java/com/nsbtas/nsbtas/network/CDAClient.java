@@ -1,14 +1,13 @@
 package com.nsbtas.nsbtas.network;
 
-import com.contentful.java.cda.CDAClient;
 import com.nsbtas.nsbtas.utils.Constants;
 
-public class Client {
-    private static CDAClient client = null;
+public class CDAClient {
+    private static com.contentful.java.cda.CDAClient client = null;
 
-    public static CDAClient getClient() {
+    public static com.contentful.java.cda.CDAClient getClient() {
         if (client == null) {
-            client = CDAClient.builder()
+            client = com.contentful.java.cda.CDAClient.builder()
                     .setSpace(Constants.spaceID)
                     .setToken(Constants.apiToken)
                     .setEnvironment("master")

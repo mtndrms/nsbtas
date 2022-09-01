@@ -1,5 +1,8 @@
 package com.nsbtas.nsbtas.adapters;
 
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.nextStage;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setChosenCard;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,23 +11,28 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.models.Card;
+import com.nsbtas.nsbtas.views.CardDropdownView;
 
 import java.util.List;
 
-public class ExpandableStackViewAdapter extends BaseAdapter {
+public class CardDropdownViewAdapter extends BaseAdapter {
 
     private List<Card> models;
     private Context context;
+    private final Fragment fragment;
+    private final CardDropdownView cardDropdownView;
 
-    public ExpandableStackViewAdapter(List<Card> models, Context context) {
+    public CardDropdownViewAdapter(List<Card> models, Context context, Fragment fragment, CardDropdownView cardDropdownView) {
         this.models = models;
         this.context = context;
+        this.fragment = fragment;
+        this.cardDropdownView = cardDropdownView;
     }
 
     @Override
@@ -54,6 +62,7 @@ public class ExpandableStackViewAdapter extends BaseAdapter {
         tvCardOwnerInfo.setText(models.get(position).getCardOwner());
         tvCardNumber.setText(models.get(position).getCardNumber());
         tvExpirationDate.setText(models.get(position).getExpirationDate());
+
         if (models.get(position).getProvider().equals("Visa")) {
             cardContainer.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_card_visa));
             ivCardProvider.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.logo_visa));
@@ -64,7 +73,12 @@ public class ExpandableStackViewAdapter extends BaseAdapter {
             cardContainer.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_card_none));
         }
 
-        cardContainer.setOnClickListener(card -> Toast.makeText(context, models.get(position).getCardNumber(), Toast.LENGTH_SHORT).show());
+        cardContainer.setOnClickListener(card -> {
+            cardDropdownView.transitionToEnd(() -> {
+                setChosenCard(models.get(position));
+                nextStage(fragment.getParentFragmentManager());
+            });
+        });
 
         return view;
     }

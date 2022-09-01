@@ -1,22 +1,17 @@
-package com.nsbtas.nsbtas.ui.activities;
+package com.nsbtas.nsbtas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.nsbtas.nsbtas.ui.fragments.HomepageFragment;
+import com.nsbtas.nsbtas.fragments.HomepageFragment;
 import com.nsbtas.nsbtas.R;
-import com.nsbtas.nsbtas.ui.fragments.ProfileFragment;
+import com.nsbtas.nsbtas.fragments.ProfileFragment;
 import com.nsbtas.nsbtas.utils.Utils;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

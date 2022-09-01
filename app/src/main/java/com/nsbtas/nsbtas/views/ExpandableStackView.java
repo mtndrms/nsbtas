@@ -14,16 +14,13 @@ import androidx.constraintlayout.motion.widget.MotionScene;
 import androidx.constraintlayout.motion.widget.TransitionBuilder;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper;
-
 import java.util.ArrayList;
 
 public class ExpandableStackView extends MotionLayout {
+
     private Context context;
-    private AttributeSet attrs = null;
-    private int defStyleAttr = 0;
-    private int rotationSide = 1;
-    private final int rotationRate = 5;
+    private final AttributeSet attrs = null;
+    private final int defStyleAttr = 0;
 
     public ExpandableStackView(@NonNull Context context) {
         super(context);
@@ -40,16 +37,10 @@ public class ExpandableStackView extends MotionLayout {
     public void setAdapter(BaseAdapter adapter) {
         MotionScene scene = new MotionScene(this);
 
-        // Constrains before transition
         int startSetId = View.generateViewId();
         ConstraintSet startSet = new ConstraintSet();
         startSet.clone(this);
 
-        int middleSetId = View.generateViewId();
-        ConstraintSet middleSet = new ConstraintSet();
-        middleSet.clone(this);
-
-        // Constrains after transition
         int endSetId = View.generateViewId();
         ConstraintSet endSet = new ConstraintSet();
         endSet.clone(this);
@@ -62,19 +53,13 @@ public class ExpandableStackView extends MotionLayout {
 
             // Card's width and height
             startSet.constrainHeight(view.getId(), fromDpToPx(getResources(), 175));
-            middleSet.constrainHeight(view.getId(), fromDpToPx(getResources(), 175));
             endSet.constrainHeight(view.getId(), fromDpToPx(getResources(), 175));
-
             startSet.constrainWidth(view.getId(), fromDpToPx(getResources(), 300));
-            middleSet.constrainWidth(view.getId(), fromDpToPx(getResources(), 300));
             endSet.constrainWidth(view.getId(), fromDpToPx(getResources(), 300));
 
-            // Constrain card to parent view's start & end
             connectViewToParent(startSet, view);
-            connectViewToParent(middleSet, view);
             connectViewToParent(endSet, view);
 
-            // Constrain first card to top of it's parent
             if (i == 0) {
                 startSet.connect(
                         view.getId(),
@@ -83,21 +68,18 @@ public class ExpandableStackView extends MotionLayout {
                         ConstraintSet.TOP,
                         fromDpToPx(getResources(), 16)
                 );
-                middleSet.connect(
+
+                endSet.connect(
                         view.getId(),
                         ConstraintSet.TOP,
                         ConstraintSet.PARENT_ID,
-                        ConstraintSet.TOP,
-                        fromDpToPx(getResources(), 16)
+                        ConstraintSet.TOP
                 );
             } else {
-                // Others will be constrained to card before
                 View last = views.get(i - 1);
-                boundTwoViewMiddle(middleSet, last, view);
-
-                // Last card's position after the transition
+                boundTwoViewEnd(endSet, last, view);
                 if (i == adapter.getCount() - 1) {
-                    middleSet.connect(
+                    endSet.connect(
                             view.getId(),
                             ConstraintSet.BOTTOM,
                             ConstraintSet.PARENT_ID,
@@ -105,61 +87,42 @@ public class ExpandableStackView extends MotionLayout {
                             fromDpToPx(getResources(), 16)
                     );
                 }
+
+                int tmp;
+                if (i < 3) {
+                    tmp = fromDpToPx(getResources(), 16);
+                } else {
+                    tmp = 0;
+                }
+
+                boundTwoViewStart(startSet, last, view, tmp);
             }
-            boundViewEnd(endSet, view);
-            middleSet.setRotation(view.getId(), rotationSide * rotationRate);
-            endSet.setRotation(view.getId(), rotationSide * -1 * rotationRate);
             views.add(view);
-            rotationSide *= -1;
         }
 
-        // Add cards to ConstraintLayout with reverse order
         for (int j = views.size() - 1; j >= 0; j--) {
             addView(views.get(j));
         }
 
-        int transitionFirstPartId = View.generateViewId();
-        MotionScene.Transition transitionFirstPart = TransitionBuilder.buildTransition(
+        int transitionId = View.generateViewId();
+        MotionScene.Transition transaction = TransitionBuilder.buildTransition(
                 scene,
-                transitionFirstPartId,
+                transitionId,
                 startSetId,
                 startSet,
-                middleSetId,
-                middleSet
-        );
-        transitionFirstPart.setDuration(500);
-
-        int transitionSecondPartId = View.generateViewId();
-        MultiStepPaymentFormHelper.setTransitionId(transitionSecondPartId);
-        MotionScene.Transition transitionSecondPart = TransitionBuilder.buildTransition(
-                scene,
-                transitionSecondPartId,
-                middleSetId,
-                middleSet,
                 endSetId,
                 endSet
         );
-        transitionSecondPart.setDuration(500);
+        transaction.setDuration(400);
 
-        scene.addTransition(transitionFirstPart);
-        scene.addTransition(transitionSecondPart);
-        scene.setTransition(transitionFirstPart);
-
+        scene.addTransition(transaction);
+        scene.setTransition(transaction);
         setScene(scene);
-        setTransition(transitionFirstPartId);
+
+        setTransition(transitionId);
     }
 
-    private void boundViewEnd(ConstraintSet constraintSet, View view) {
-        constraintSet.connect(
-                view.getId(),
-                ConstraintSet.TOP,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.BOTTOM
-        );
-    }
-
-    // Middle position of two card (aka. after fragment loads)
-    private void boundTwoViewMiddle(ConstraintSet constraintSet, View firstView, View secondView) {
+    private void boundTwoViewEnd(ConstraintSet constraintSet, View firstView, View secondView) {
         constraintSet.connect(
                 secondView.getId(),
                 ConstraintSet.TOP,
@@ -169,8 +132,6 @@ public class ExpandableStackView extends MotionLayout {
         );
     }
 
-    // Start position of two card (aka. before transition)
-    // Margin will give stack effect
     private void boundTwoViewStart(ConstraintSet constraintSet, View firstView, View secondView, int marginBottom) {
         constraintSet.connect(
                 secondView.getId(),

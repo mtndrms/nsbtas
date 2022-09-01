@@ -1,26 +1,25 @@
-package com.nsbtas.nsbtas.ui.fragments;
+package com.nsbtas.nsbtas.fragments;
 
-import static com.nsbtas.nsbtas.network.Client.getClient;
+import static com.nsbtas.nsbtas.network.CDAClient.getClient;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCardId;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getTransitionId;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.contentful.java.cda.CDAEntry;
 import com.nsbtas.nsbtas.R;
-import com.nsbtas.nsbtas.adapters.ExpandableStackViewAdapter;
+import com.nsbtas.nsbtas.adapters.CardDropdownViewAdapter;
 import com.nsbtas.nsbtas.models.Card;
-import com.nsbtas.nsbtas.ui.views.ExpandableStackView;
+import com.nsbtas.nsbtas.views.CardDropdownView;
 import com.nsbtas.nsbtas.utils.Callback;
 
 import java.util.ArrayList;
@@ -78,13 +77,13 @@ public class SelectPaymentMethodFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ExpandableStackView expandableStackView = view.findViewById(R.id.expandable_stack);
+        CardDropdownView cardDropdownView = view.findViewById(R.id.expandable_stack);
 
         this.callback = () -> {
             requireActivity().runOnUiThread(() -> {
-                expandableStackView.setAdapter(new ExpandableStackViewAdapter(cards, requireContext(), this, expandableStackView));
-                expandableStackView.transitionToEnd(() -> {
-                    expandableStackView.setTransition(getTransitionId());
+                cardDropdownView.setAdapter(new CardDropdownViewAdapter(cards, requireContext(), this, cardDropdownView));
+                cardDropdownView.transitionToEnd(() -> {
+                    cardDropdownView.setTransition(getTransitionId());
                 });
             });
         };
@@ -108,13 +107,6 @@ public class SelectPaymentMethodFragment extends Fragment {
         Bundle result = new Bundle();
 
         result.putInt("serviceId", serviceId);
-        result.putString("companyName", firmName);
-        result.putString("customerName", customerName);
-        result.putString("emailAddress", emailAddress);
-        result.putString("address", address);
-        result.putString("note", note);
-        result.putString("phoneNumber", phoneNumber);
-        result.putInt("cardId", getCardId());
         getParentFragmentManager().setFragmentResult("requestKey", result);
     }
 }

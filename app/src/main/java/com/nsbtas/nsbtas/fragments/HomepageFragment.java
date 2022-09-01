@@ -1,6 +1,4 @@
-package com.nsbtas.nsbtas.ui.fragments;
-
-import static com.nsbtas.nsbtas.network.Client.getClient;
+package com.nsbtas.nsbtas.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +25,9 @@ import com.contentful.java.cda.CDAEntry;
 import com.nsbtas.nsbtas.R;
 import com.nsbtas.nsbtas.adapters.ExpenseRecyclerViewAdapter;
 import com.nsbtas.nsbtas.models.Expense;
-import com.nsbtas.nsbtas.ui.activities.PaymentActivity;
+import com.nsbtas.nsbtas.activities.MoreActivity;
+import com.nsbtas.nsbtas.activities.PaymentActivity;
+import com.nsbtas.nsbtas.network.CDAClient;
 import com.nsbtas.nsbtas.utils.Utils;
 
 import java.util.ArrayList;
@@ -58,19 +58,17 @@ public class HomepageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("NSBTAS", Context.MODE_PRIVATE);
-
-        LinearLayout btnMakePayment = view.findViewById(R.id.btnMakePayment);
-        LinearLayout btnServices = view.findViewById(R.id.btnServices);
-        LinearLayout btnHelp = view.findViewById(R.id.btnHelp);
+        LinearLayout btnBookmarkFirst = view.findViewById(R.id.btnBookmarkFirst);
+        LinearLayout btnBookmarkSecond = view.findViewById(R.id.btnBookmarkSecond);
+        LinearLayout btnBookmarkThird = view.findViewById(R.id.btnBookmarkThird);
         LinearLayout btnMore = view.findViewById(R.id.btnMore);
         ImageView btnProfilePicture = view.findViewById(R.id.ivCustomerProfilePicture);
         TextView tvCustomerUsername = view.findViewById(R.id.tvCustomerUsername);
 
         List<Expense> expenses = new ArrayList<>();
-
         new Thread(() -> {
             try {
-                usersExpenses = getClient().fetch(CDAEntry.class)
+                usersExpenses = CDAClient.getClient().fetch(CDAEntry.class)
                         .where("content_type", "expense")
                         .where("fields.user", sharedPreferences.getString("userEntryId", "null"))
                         .all();
@@ -98,12 +96,12 @@ public class HomepageFragment extends Fragment {
 
         tvCustomerUsername.setText(sharedPreferences.getString("username", "null"));
 
-        btnMakePayment.setOnClickListener(view1 -> {
+        btnBookmarkFirst.setOnClickListener(view1 -> {
             Intent intent = new Intent(getContext(), PaymentActivity.class);
             startActivity(intent);
         });
 
-        btnHelp.setOnClickListener(view12 -> {
+        btnBookmarkThird.setOnClickListener(view12 -> {
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse("tel:08504418818"));
             startActivity(callIntent);
@@ -116,5 +114,9 @@ public class HomepageFragment extends Fragment {
             fragmentTransaction.commit();
         });
 
+        btnMore.setOnClickListener(view14 -> {
+            Intent intent = new Intent(requireContext(), MoreActivity.class);
+            startActivity(intent);
+        });
     }
 }

@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.nsbtas.nsbtas.R;
-import com.nsbtas.nsbtas.ui.activities.MainActivity;
 
 import java.util.List;
 

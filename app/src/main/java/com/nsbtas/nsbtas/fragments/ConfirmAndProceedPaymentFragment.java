@@ -1,6 +1,7 @@
-package com.nsbtas.nsbtas.ui.fragments;
+package com.nsbtas.nsbtas.fragments;
 
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getChosenCard;
+import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getChosenCompany;
 import static com.nsbtas.nsbtas.utils.Utils.getServiceById;
 
 import android.os.Bundle;
@@ -54,12 +55,12 @@ public class ConfirmAndProceedPaymentFragment extends Fragment {
 
         getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, result) -> {
             tvService.setText(getServiceById(result.getInt("serviceId")));
-            tvCompanyName.setText(result.getString("companyName"));
-            tvCustomerName.setText(result.getString("customerName"));
-            tvPhoneNumber.setText(result.getString("phoneNumber"));
-            tvAddress.setText(result.getString("address"));
-            tvEmailAddress.setText(result.getString("emailAddress"));
-            tvNote.setText(result.getString("note"));
+            tvCompanyName.setText(getChosenCompany().getCompanyName());
+            tvCustomerName.setText(getChosenCompany().getCustomerName());
+            tvPhoneNumber.setText(getChosenCompany().getPhoneNumber());
+            tvAddress.setText(getChosenCompany().getAddress());
+            tvEmailAddress.setText(getChosenCompany().getEmailAddress());
+            tvNote.setText(getChosenCompany().getNote());
             tvAmount.setText(result.getString("amount"));
             tvCardOwner.setText(getChosenCard().getCardOwner());
             tvCardNumber.setText(getChosenCard().getCardNumber());

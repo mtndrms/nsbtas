@@ -1,4 +1,4 @@
-package com.nsbtas.nsbtas.ui.activities;
+package com.nsbtas.nsbtas.activities;
 
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.getCurrentPage;
 import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.nextStage;

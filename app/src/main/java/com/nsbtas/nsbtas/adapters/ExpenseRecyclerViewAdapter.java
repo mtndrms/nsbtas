@@ -62,7 +62,6 @@ public class ExpenseRecyclerViewAdapter extends RecyclerView.Adapter<ExpenseRecy
         viewHolder.getTvAmount().setText(String.format("₺%s", localDataSet.get(position).getAmount()));
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return localDataSet.size();
