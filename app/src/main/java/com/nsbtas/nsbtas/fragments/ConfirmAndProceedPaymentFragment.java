@@ -54,7 +54,7 @@ public class ConfirmAndProceedPaymentFragment extends Fragment {
         TextView tvAmount = view.findViewById(R.id.tvAmount);
 
         getParentFragmentManager().setFragmentResultListener("requestKey", this, (requestKey, result) -> {
-            tvService.setText(getServiceById(result.getInt("serviceId")));
+            tvService.setText(getServiceById(1)); // FIXME: 2.09.2022 Temporary!
             tvCompanyName.setText(getChosenCompany().getCompanyName());
             tvCustomerName.setText(getChosenCompany().getCustomerName());
             tvPhoneNumber.setText(getChosenCompany().getPhoneNumber());

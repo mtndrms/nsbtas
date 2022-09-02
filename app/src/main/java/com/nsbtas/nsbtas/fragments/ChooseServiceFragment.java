@@ -1,6 +1,6 @@
 package com.nsbtas.nsbtas.fragments;
 
-import static com.nsbtas.nsbtas.utils.MultiStepPaymentFormHelper.setIsServiceChosen;
+import static com.nsbtas.nsbtas.network.CDAClient.getClient;
 
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
@@ -8,29 +8,33 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
+import com.contentful.java.cda.CDAArray;
+import com.contentful.java.cda.CDAEntry;
 import com.nsbtas.nsbtas.R;
+import com.nsbtas.nsbtas.adapters.ServiceRecyclerViewAdapter;
+import com.nsbtas.nsbtas.models.Service;
+import com.nsbtas.nsbtas.utils.Callback;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ChooseServiceFragment extends Fragment {
-    AtomicBoolean isTransitionAlreadyHappened = new AtomicBoolean(false);
+    private Callback callback;
+    private final List<Service> services = new ArrayList<>();
 
     public ChooseServiceFragment() {
     }
 
-    public static ChooseServiceFragment newInstance(String title, int page) {
-        ChooseServiceFragment chooseServiceFragment = new ChooseServiceFragment();
-        Bundle args = new Bundle();
-        args.putString("title", title);
-        args.putInt("page", page);
-        chooseServiceFragment.setArguments(args);
-        return chooseServiceFragment;
+    public static ChooseServiceFragment newInstance() {
+        return new ChooseServiceFragment();
     }
 
     @Override
@@ -40,6 +44,27 @@ public class ChooseServiceFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        new Thread(() -> {
+            try {
+                CDAArray services = getClient().fetch(CDAEntry.class).where("content_type", "service").all();
+                for (CDAEntry entry : services.entries().values()) {
+                    this.services.add(
+                            new Service(
+                                    entry.getField("id"),
+                                    entry.getField("name"),
+                                    entry.getField("description"),
+                                    entry.getField("months"),
+                                    entry.getField("price")
+                            ));
+                }
+                if (callback != null) {
+                    callback.callback();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }).start();
+
         return inflater.inflate(R.layout.fragment_choose_service, container, false);
     }
 
@@ -47,44 +72,10 @@ public class ChooseServiceFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LinearLayout service1 = view.findViewById(R.id.service1);
-        LinearLayout service2 = view.findViewById(R.id.service2);
-        LinearLayout service3 = view.findViewById(R.id.service3);
-        TransitionDrawable transition1 = (TransitionDrawable) service1.getBackground();
-        TransitionDrawable transition2 = (TransitionDrawable) service2.getBackground();
-        TransitionDrawable transition3 = (TransitionDrawable) service3.getBackground();
-        Bundle result = new Bundle();
-
-        service1.setOnClickListener(view1 -> {
-            makeTransitionOnSelect(transition1);
-            result.putInt("serviceId", 1);
-            getParentFragmentManager().setFragmentResult("requestKey", result);
-            setIsServiceChosen(true);
+        this.callback = () -> requireActivity().runOnUiThread(() -> {
+            RecyclerView rvServices = view.findViewById(R.id.rvServices);
+            rvServices.setLayoutManager(new LinearLayoutManager(requireActivity()));
+            rvServices.setAdapter(new ServiceRecyclerViewAdapter(services));
         });
-
-        service2.setOnClickListener(view12 -> {
-            makeTransitionOnSelect(transition2);
-            result.putInt("serviceId", 2);
-            getParentFragmentManager().setFragmentResult("requestKey", result);
-            setIsServiceChosen(true);
-        });
-
-        service3.setOnClickListener(view13 -> {
-            makeTransitionOnSelect(transition3);
-            result.putInt("serviceId", 3);
-            getParentFragmentManager().setFragmentResult("requestKey", result);
-            setIsServiceChosen(true);
-        });
-    }
-
-    private void makeTransitionOnSelect(TransitionDrawable transitionDrawable) {
-        if (isTransitionAlreadyHappened.get()) {
-            isTransitionAlreadyHappened.set(false);
-            transitionDrawable.reverseTransition(100);
-            super.onDestroyView();
-        } else {
-            isTransitionAlreadyHappened.set(true);
-            transitionDrawable.startTransition(100);
-        }
     }
 }

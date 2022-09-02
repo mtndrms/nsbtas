@@ -52,7 +52,7 @@ public class CompanyRecyclerViewAdapter extends RecyclerView.Adapter<CompanyRecy
         ImageView ivCheck = view.findViewById(R.id.ivIconChecked);
 
         view.setOnClickListener(view1 -> {
-            if (!MultiStepPaymentFormHelper.isCompanyChosen) {
+            if (!MultiStepPaymentFormHelper.isCompanyChosen()) {
                 setIsCompanyChosen(true);
                 setChosenCompany(localDataSet.get(localDataSet.size() - 1)); // FIXME: 1.09.2022 Temporary!
                 ivCheck.setVisibility(View.VISIBLE);

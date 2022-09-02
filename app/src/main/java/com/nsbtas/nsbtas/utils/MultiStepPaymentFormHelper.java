@@ -28,9 +28,8 @@ public class MultiStepPaymentFormHelper {
     private static int transitionId;
     private static Card chosenCard;
     private static Company chosenCompany;
-
     private static boolean isServiceChosen = false;
-    public static boolean isCompanyChosen = false;
+    private static boolean isCompanyChosen = false;
     private static boolean isAmountPlaced = false;
 
     public static void setStages() {
@@ -129,5 +128,13 @@ public class MultiStepPaymentFormHelper {
 
     public static void setIsCompanyChosen(boolean isCompanyChosen) {
         MultiStepPaymentFormHelper.isCompanyChosen = isCompanyChosen;
+    }
+
+    public static boolean isServiceChosen() {
+        return isServiceChosen;
+    }
+
+    public static boolean isCompanyChosen() {
+        return isCompanyChosen;
     }
 }
